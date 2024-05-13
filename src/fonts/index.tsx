@@ -89,7 +89,7 @@ export const suisse = localFont({
       style: "normal",
     },
     {
-      path: "../fonts/suisse_int_l/SuisseIntl-UltraLight.otf",
+      path: "../fonts/suisse_int_l/SuisseIntl-Ultralight.otf",
       weight: "200",
       style: "normal",
     },
