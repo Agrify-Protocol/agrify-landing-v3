@@ -1,3 +1,7 @@
+## Live preview: https://agrify-landing-v3-clone.vercel.app/
+<img width="1440" alt="Screenshot 2024-05-13 at 21 13 08" src="https://github.com/chiomanwocha/agrify-landing-v3-clone/assets/77916165/856a9b24-d037-47eb-a212-76f59502bbf1">
+<br /><br /><br /><br /><br /><br />
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
