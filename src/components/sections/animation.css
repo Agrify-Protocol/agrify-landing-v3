@@ -1,0 +1,67 @@
+.soft-bounce {
+  animation: softBounce 1.8s ease-in-out infinite alternate;
+}
+@keyframes softBounce {
+  0% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(-3px);
+  }
+}
+
+.soft-bounce-reverse {
+  animation: softBounceReverse 1.8s ease-in-out infinite alternate;
+}
+@keyframes softBounceReverse {
+  0% {
+    transform: translateY(3px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(3px);
+  }
+}
+
+.constant-tilt-shake {
+  animation: tilt-shaking 6s infinite linear;
+}
+@keyframes tilt-shaking {
+  0% {
+    transform: rotate(1deg);
+  }
+  20% {
+    transform: rotate(-1deg);
+  }
+  40% {
+    transform: rotate(0deg);
+  }
+  60% {
+    transform: rotate(1deg);
+  }
+  80% {
+    transform: rotate(-1deg);
+  }
+  100% {
+    transform: rotate(1deg);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 100s linear infinite;
+  display: inline-block;
+}
+
+@keyframes marquee {
+    100% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }

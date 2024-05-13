@@ -5,7 +5,6 @@ export const metadata: Metadata = {
   title: "Agrify",
   description:
     "Helping Farmers improve yield, access debt free finance and qualify for international exports",
-  icons: { icon: '/logo.svg' },
 };
 
 export default function RootLayout({
@@ -15,6 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/icons/logo.svg" type="image/svg+xml" />
+      </head>
       <body>
         <Providers>{children}</Providers>
       </body>

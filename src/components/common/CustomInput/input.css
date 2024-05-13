@@ -1,0 +1,19 @@
+.custom-tel-input::placeholder,
+.custom-text-input::placeholder {
+  font-size: 14px;
+  letter-spacing: -2%;
+  color: #a6a6a6;
+}
+
+.custom-text-input {
+  border-radius: 16px;
+  background-color: white;
+  padding: 12px;
+  outline: none;
+  border: 1px solid #e2e8f0;
+  transition: all 0.1s ease-in-out,
+}
+
+.custom-text-input:hover, .custom-text-input:focus{
+  border: 1px solid #c8c8c8;
+}

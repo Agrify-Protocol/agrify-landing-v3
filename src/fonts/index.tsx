@@ -122,21 +122,16 @@ export const suisse = localFont({
 });
 
 export const theme = extendTheme({
-  components: {
-    Heading: {
-      baseStyle: {
-        fontFamily: pangaia.style.fontFamily,
-      },
-    },
-    Text: {
-      baseStyle: {
-        fontFamily: inter.style.fontFamily,
-      },
-    },
-    InputGroup: {
-      baseStyle: {
-        fontFamily: suisse.style.fontFamily,
-      },
+  colors: {
+    brand: {
+      grey: "#F5F5F7",
+      darkGrey: "#A6A6A6",
+      lightGrey: "#FAFAFA",
+      lighterGrey: '#0F0F0F26',
+      yellow: "#FFC757",
+      green: "#0CC14C",
+      mainBlack: "#282828",
+      secondaryForeGround: '#565656',
     },
   },
 });
