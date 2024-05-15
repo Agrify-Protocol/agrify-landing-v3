@@ -17,20 +17,25 @@ import questions from "./mock.json";
 
 const Faq = () => {
   return (
-    <Box px="49px">
-      <SectionButton title="Questions" />
-      <Box display="flex" justifyContent="space-between">
+    <Box px={{ base: 0, md: "49px" }}>
+      <SectionButton title="Questions" mb={{ base: 4, lg: 0 }} />
+      <Box
+        display="flex"
+        flexDir={{ base: "column", lg: "row" }}
+        gap={{ base: 10, lg: 0 }}
+        justifyContent="space-between"
+      >
         <Box>
           <Text
             fontFamily={pangaia.style.fontFamily}
             fontWeight="200"
-            fontSize="48px"
+            fontSize={{ base: "32px", lg: "48px" }}
             letterSpacing="-0.6%"
           >
             FAQ
           </Text>
         </Box>
-        <Box width="630px">
+        <Box width={{ base: "100%", lg: "630px" }}>
           <Accordion allowMultiple>
             {questions.map((item, index) => (
               <AccordionItem
@@ -46,6 +51,7 @@ const Faq = () => {
                       _hover={{ backgroundColor: "transparent" }}
                       display="flex"
                       gap={4}
+                      px={{ base: 0, lg: 4 }}
                     >
                       {isExpanded ? (
                         <Image
@@ -64,13 +70,18 @@ const Faq = () => {
                         textAlign="left"
                         fontFamily={suisse.style.fontFamily}
                         fontWeight="300"
-                        fontSize="18px"
+                        fontSize={{ base: "16px", lg: "18px" }}
                         letterSpacing="-2%"
                       >
                         {item.title}
                       </Box>
                     </AccordionButton>
-                    <AccordionPanel pb={4}>{item.answer}</AccordionPanel>
+                    <AccordionPanel
+                      pb={4}
+                      fontSize={{ base: "16px", lg: "18px" }}
+                    >
+                      {item.answer}
+                    </AccordionPanel>
                   </>
                 )}
               </AccordionItem>

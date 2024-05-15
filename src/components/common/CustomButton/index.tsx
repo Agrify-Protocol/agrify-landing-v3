@@ -23,7 +23,7 @@ const CustomButton = ({
       border={variant === "solid" ? "1px solid transparent" : "1px solid black"}
       color={variant === "solid" ? "white" : "black"}
       fontSize="14px"
-      padding="12px 24px 12px 24px"
+      padding={{ base: "8px 24px 8px 24px", lg: "12px 24px 12px 24px" }}
       transition="all 0.3s ease-in-out"
       _hover={
         variant === "solid"

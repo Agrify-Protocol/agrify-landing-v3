@@ -28,13 +28,18 @@ const Product = () => {
     },
   ];
   return (
-    <Box bgColor="white" rounded="24px" py="78px" px="150px">
-      <Box mb="104px">
+    <Box
+      bgColor="white"
+      rounded={{ base: "16px", lg: "24px" }}
+      py={{ base: "48px", lg: "78px" }}
+      px={{ base: 0, md: "40px", lg: "150px" }}
+    >
+      <Box mb={{ base: "64px", lg: "104px" }}>
         <SectionButton title="Product" width="fit-content" mx="auto" mb={4} />
         <Text
           fontFamily={pangaia.style.fontFamily}
           fontWeight="200"
-          fontSize="32px"
+          fontSize={{ base: "18px", lg: "32px" }}
           textAlign="center"
         >
           With Agrify Farmers Can
@@ -48,7 +53,7 @@ const Product = () => {
             title={card.title}
             text={card.text}
             img={card.img}
-            isReversed={index % 2 !== 0}
+            id={index}
           />
         ))}
       </Box>

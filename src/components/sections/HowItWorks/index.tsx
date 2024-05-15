@@ -3,16 +3,16 @@ import { pangaia, suisse } from "@/fonts";
 import Image from "next/image";
 import tech from "../../../../public/images/technology.png";
 import SectionButton from "@/components/common/SectionButton";
-import '../animation.css'
+import "../animation.css";
 
 const HowItWorks = () => {
   return (
     <Box
-      mt="200px"
-      rounded="24px"
+      mt={{ base: "80px", lg: "200px" }}
+      rounded={{ base: "16px", lg: "24px" }}
       bgColor="white"
-      pt="65px"
-      pb="59px"
+      pt={{ base: "48px", lg: "65px" }}
+      pb={{ base: "72px", lg: "59px" }}
       display="flex"
       flexDir="column"
       justifyContent="center"
@@ -21,13 +21,17 @@ const HowItWorks = () => {
       <SectionButton title="How it works" mb={4} />
       <Text
         fontFamily={pangaia.style.fontFamily}
-        fontWeight="300"
-        fontSize="40px"
-        mb={12}
+        fontWeight={{ base: "200", lg: "300" }}
+        fontSize={{ base: "20px", lg: "40px" }}
+        mb={{ base: 16, lg: 12 }}
       >
         Our Technology
       </Text>
-      <Box w="231.82px" mb="91px" className="soft-bounce">
+      <Box
+        w="231.82px"
+        mb={{ base: "48px", lg: "91px" }}
+        className="soft-bounce"
+      >
         <Image src={tech} alt="agrify technology img" />
       </Box>
       <Text
@@ -36,6 +40,8 @@ const HowItWorks = () => {
         fontFamily={suisse.style.fontFamily}
         lineHeight="19.2px"
         color="brand.secondaryForeGround"
+        px={{ base: "25.5px", lg: 0 }}
+        id="join-waitlist"
       >
         Our proprietary tech stack utilises a unique combination of satellite
         imagery, artificial intelligence and the blockchain to measure,

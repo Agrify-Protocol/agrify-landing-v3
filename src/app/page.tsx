@@ -12,9 +12,9 @@ import Connect from "@/components/sections/Connect";
 
 const Home = () => {
   return (
-    <Box backgroundColor="brand.grey">
+    <Box backgroundColor="brand.grey" maxW="1800px" mx="auto">
       <Navbar />
-      <Box px={4} pb={1}>
+      <Box px={{ base: 3, lg: 4 }} pb={1}>
         <Hero />
         <Collaboration />
         <ClimateChange />

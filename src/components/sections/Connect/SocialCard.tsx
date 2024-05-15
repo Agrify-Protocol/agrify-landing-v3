@@ -23,7 +23,7 @@ const SocialCard = ({ icon, text, link, rotation, hover }: SocialCardProp) => {
         padding={6}
         borderColor="brand.darkGrey"
         background="white"
-        width="332px"
+        width={{ base: "100%", md: "332px" }}
         transform={rotation}
         transition="all 0.3s ease-in-out"
         _hover={{ transform: hover }}

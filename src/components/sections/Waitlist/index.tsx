@@ -7,19 +7,25 @@ import CustomInput from "@/components/common/CustomInput";
 import { useRouter } from "next/navigation";
 
 const Waitlist = () => {
-  const router = useRouter()
+  const router = useRouter();
   return (
-    <Box my="200px" as="form" maxW="558px" mx="auto" id="join-waitlist">
+    <Box
+      my={{ base: "80px", lg: "200px" }}
+      as="form"
+      maxW="558px"
+      mx="auto"
+      px={{ base: "11px", lg: 0 }}
+    >
       <Text
         as="h3"
         fontWeight="200"
-        fontSize="40px"
+        fontSize={{ base: "24px", lg: "40px" }}
         fontFamily={pangaia.style.fontFamily}
         textAlign="center"
       >
         Join the Waitlist
       </Text>
-      <Stack my={10} spacing={4}>
+      <Stack my={{ base: 6, lg: 10 }} spacing={4}>
         <CustomInput
           label="Full Name"
           id="full-name"
@@ -58,10 +64,10 @@ const Waitlist = () => {
         variant="solid"
         w="100%"
         fontSize="16px"
-        fontWeight="500"
-        letterSpacing="-2%"
+        fontWeight={{ base: "400", lg: "500" }}
+        letterSpacing={{ base: "0.2%", lg: "-2%" }}
         fontFamily={suisse.style.fontFamily}
-        onClick={() => router.push('/waitlist-confirmed')}
+        onClick={() => router.push("/waitlist-confirmed")}
       />
     </Box>
   );
