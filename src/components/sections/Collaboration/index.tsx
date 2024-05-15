@@ -111,9 +111,9 @@ const Collaboration = () => {
         >
           {Array.from({ length: 3 }, () => collaborators)
             .flat()
-            .map((item) => (
+            .map((item, index) => (
               <Box
-                key={item.name}
+                key={index}
                 onMouseEnter={() => setCurrentItem(item.name)}
                 onMouseLeave={() => setCurrentItem("")}
                 flexShrink={0}

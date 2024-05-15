@@ -67,7 +67,10 @@ const Waitlist = () => {
         fontWeight={{ base: "400", lg: "500" }}
         letterSpacing={{ base: "0.2%", lg: "-2%" }}
         fontFamily={suisse.style.fontFamily}
-        onClick={() => router.push("/waitlist-confirmed")}
+        onClick={(e: any) => {
+          e.preventDefault();
+          router.push("/waitlist-confirmed");
+        }}
       />
     </Box>
   );

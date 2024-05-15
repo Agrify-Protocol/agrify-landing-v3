@@ -5,7 +5,7 @@ import { Box, BoxProps } from "@chakra-ui/react";
 interface CustomButtonProp extends BoxProps {
   text: string;
   variant?: "solid" | "outline";
-  onClick: () => void;
+  onClick: (e?: any) => void;
 }
 
 const CustomButton = ({

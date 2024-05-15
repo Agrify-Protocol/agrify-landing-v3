@@ -18,6 +18,7 @@ import handleScroll from "@/utils/handleScroll";
 import hamburger from "../../../../public/icons/hamburger-open.svg";
 import hamburgerClose from "../../../../public/icons/hamburger-close.svg";
 import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 const Navbar = () => {
   const menu = [
@@ -31,6 +32,8 @@ const Navbar = () => {
     },
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <>
@@ -90,11 +93,13 @@ const Navbar = () => {
         <Box py={2} onClick={() => setIsMenuOpen(true)}>
           <Image src={hamburger} alt="hamburger menu icon" />
         </Box>
-        <CustomButton
-          text="Join the waitlist"
-          variant="outline"
-          onClick={() => handleScroll("join-waitlist")}
-        />
+        {pathname.includes("/waitlist-confirmed") ? null : (
+          <CustomButton
+            text="Join the waitlist"
+            variant="outline"
+            onClick={() => handleScroll("join-waitlist")}
+          />
+        )}
       </Box>
       <Drawer
         isOpen={isMenuOpen}
@@ -139,7 +144,9 @@ const Navbar = () => {
                   cursor="pointer"
                   onClick={() => {
                     setIsMenuOpen(false);
-                    handleScroll("climate-change");
+                    pathname.includes("/waitlist-confirmed")
+                      ? router.push("/")
+                      : handleScroll("climate-change");
                   }}
                 >
                   <Text>{item.title}</Text>
