@@ -92,3 +92,44 @@
     transform: translateY(0em);
   }
 }
+
+@media screen and (max-width: 992px) {
+  .soft-bounce {
+    animation: softBounce 0s ease-in-out infinite alternate;
+  }
+  @keyframes softBounce {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  .soft-bounce-reverse {
+    animation: softBounceReverse 0s ease-in-out infinite alternate;
+  }
+  @keyframes softBounceReverse {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  .wave-animation div {
+    animation: wave-text 0s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  }
+  
+  .wave-animation div:nth-of-type(odd) {
+    animation-delay: 0s;
+  }
+  .wave-animation div:nth-of-type(even) {
+    animation-delay: 0s;
+  }
+}

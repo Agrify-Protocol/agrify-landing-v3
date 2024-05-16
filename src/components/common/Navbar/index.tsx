@@ -108,8 +108,8 @@ const Navbar = () => {
         isFullHeight
       >
         <DrawerContent
-          background="rgba(245, 245, 247, 0.1)"
-          backdropFilter="blur(50px)"
+          // background="rgba(245, 245, 247, 0.1)"
+          // backdropFilter="blur(50px)"
           boxShadow="none"
         >
           <DrawerBody px={4} pt={6} pb={4}>
