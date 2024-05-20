@@ -5,12 +5,16 @@ import Collaboration from "@/components/sections/Collaboration";
 import ClimateChange from "@/components/sections/ClimateChange";
 import Product from "@/components/sections/Product";
 import HowItWorks from "@/components/sections/HowItWorks";
-import Waitlist from "@/components/sections/Waitlist";
 import Partners from "@/components/sections/Partners";
 import Faq from "@/components/sections/Faq";
 import Connect from "@/components/sections/Connect";
+import dynamic from "next/dynamic";
 
 const Home = () => {
+  const NoSSRWaitlist = dynamic(
+    () => import("@/components/sections/Waitlist"),
+    { ssr: false }
+  );
   return (
     <Box backgroundColor="brand.grey" maxW="1800px" mx="auto">
       <Navbar />
@@ -20,7 +24,7 @@ const Home = () => {
         <ClimateChange />
         <Product />
         <HowItWorks />
-        <Waitlist />
+        <NoSSRWaitlist />
         <Partners />
         <Faq />
         <Connect />

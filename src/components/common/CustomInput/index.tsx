@@ -1,15 +1,20 @@
 import { inter } from "@/fonts";
 import { Box, InputGroup, Text } from "@chakra-ui/react";
-import { useState } from "react";
-import countryList from "../../../const/countryList.json";
+import React, { useState } from "react";
 import "./input.css";
+import getCountryCodeValue from "@/components/sections/Waitlist/controller/getCountryCodeValue";
 
 interface CustomInputProp {
   label: string;
   id: string;
   placeholder: string;
   type?: string;
-  onChange: () => void;
+  isInvalid?: boolean;
+  errorMessage?: string;
+  onChange: (e?: any) => void;
+  setOpenCountryModal?: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedCountry?: any;
+  setIsInputInvalid?: React.Dispatch<React.SetStateAction<any>>;
 }
 const CustomInput = ({
   label,
@@ -17,23 +22,23 @@ const CustomInput = ({
   placeholder,
   type = "text",
   onChange,
+  setOpenCountryModal,
+  isInvalid,
+  errorMessage,
+  selectedCountry,
+  setIsInputInvalid,
 }: CustomInputProp) => {
-  
-  const getCountryCodeValue = (countryIdd: {
-    root?: string | undefined;
-    suffixes?: string[] | undefined;
-  }) => {
-    if (countryIdd.suffixes && countryIdd.suffixes.length > 2) {
-      return `${countryIdd.root ?? ""}`;
-    }
-    return `${countryIdd.root ?? ""}${countryIdd.suffixes ?? ""}`;
-  };
-
-  const [selectedCountry, setSelectedCountry] = useState(
-    getCountryCodeValue(countryList[0].idd)
-  );
-
   const [telInputActive, setTelInputActive] = useState(false);
+
+  const getBorderColor = () => {
+    if (isInvalid) {
+      return "1px solid #dc143c";
+    } else if (telInputActive) {
+      return "1px solid #C8C8C8";
+    } else {
+      return "1px solid #E2E8F0";
+    }
+  };
 
   return (
     <InputGroup
@@ -47,68 +52,94 @@ const CustomInput = ({
         {label}
       </Text>
       {type !== "tel" ? (
-        <input
-          className="custom-text-input"
-          style={{
-            transition: "all 0.1s ease-in-out",
-          }}
-          id={id}
-          placeholder={placeholder}
-          type={type}
-          onChange={onChange}
-        />
-      ) : (
-        <Box
-          bgColor="white"
-          display="flex"
-          alignItems="center"
-          boxSizing="border-box"
-          rounded="16px"
-          border={telInputActive ? "1px solid #C8C8C8" : "1px solid #E2E8F0"}
-          transition="all 0.1s ease-in-out"
-          _hover={{
-            border: "1px solid #C8C8C8",
-          }}
-          padding={2}
-        >
-          <select
-            style={{
-              fontSize: "24px",
-              outline: "none",
-              backgroundColor: "white",
-              borderRadius: "16px",
-              cursor: "pointer",
-            }}
-            onChange={(e) => setSelectedCountry(e.target.value)}
-          >
-            {countryList.map((country) => (
-              <option
-                key={country.name.common}
-                data-image={country.flags.png}
-                value={getCountryCodeValue(country.idd)}
-              >
-                {country.flag}
-              </option>
-            ))}
-          </select>
-          <Text fontSize="14px">{selectedCountry}</Text>
+        <Box>
           <input
-            id={id}
-            placeholder={placeholder}
+            className={`custom-text-input ${
+              isInvalid ? "error-text-input-border" : "text-input-border"
+            }`}
             style={{
-              marginLeft: "8px",
-              outline: "none",
+              transition: "all 0.1s ease-in-out",
               width: "100%",
-              backgroundColor: "transparent",
-              transition: "border-width 0.3s",
             }}
-            className="custom-tel-input"
-            onFocus={() => setTelInputActive(true)}
-            onBlur={() => setTelInputActive(false)}
+            id={id}
+            name={id}
+            placeholder={placeholder}
             type={type}
             onChange={onChange}
+            onBlur={() =>
+              setIsInputInvalid &&
+              setIsInputInvalid((prev: any) => ({ ...prev, [id]: false }))
+            }
           />
+          {isInvalid ? (
+            <Text fontSize="12px" color="#dc143c">
+              {errorMessage}
+            </Text>
+          ) : null}
         </Box>
+      ) : (
+        <>
+          <Box
+            bgColor="white"
+            display="flex"
+            alignItems="center"
+            boxSizing="border-box"
+            rounded="16px"
+            border={getBorderColor()}
+            transition="all 0.1s ease-in-out"
+            _hover={{
+              border: isInvalid ? "1px solid #dc143c" : "1px solid #C8C8C8",
+            }}
+            padding={2}
+          >
+            <button
+              type="button"
+              onClick={() => setOpenCountryModal && setOpenCountryModal(true)}
+              style={{
+                fontSize: "24px",
+                outline: "none",
+                display: "flex",
+                alignItems: "center",
+                backgroundColor: "white",
+                borderRadius: "16px",
+                cursor: "pointer",
+              }}
+            >
+              {selectedCountry.flag}
+              <Text fontSize="14px">
+                {getCountryCodeValue(selectedCountry.idd)}
+              </Text>
+            </button>
+            <input
+              id={id}
+              name={id}
+              placeholder={placeholder}
+              style={{
+                marginLeft: "8px",
+                outline: "none",
+                width: "100%",
+                backgroundColor: "transparent",
+                transition: "border-width 0.3s",
+              }}
+              className="custom-tel-input"
+              onFocus={() => {
+                setTelInputActive(true);
+              }}
+              onBlur={() => {
+                setTelInputActive(false);
+                setIsInputInvalid &&
+                  setIsInputInvalid((prev: any) => ({ ...prev, [id]: false }));
+              }}
+              type={type}
+              onChange={onChange}
+            />
+          </Box>
+          {isInvalid ? (
+            <Text fontSize="12px" color="#dc143c">
+              {errorMessage}
+            </Text>
+          ) : null}
+        </>
       )}
     </InputGroup>
   );

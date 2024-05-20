@@ -1,10 +1,13 @@
 "use client";
 
 import { Box, BoxProps } from "@chakra-ui/react";
+import CustomerLoader from "../CustomLoader";
 
 interface CustomButtonProp extends BoxProps {
   text: string;
   variant?: "solid" | "outline";
+  isLoading?: boolean;
+  isDisabled?: boolean;
   onClick: (e?: any) => void;
 }
 
@@ -12,6 +15,8 @@ const CustomButton = ({
   text,
   variant = "outline",
   onClick,
+  isLoading,
+  isDisabled,
   ...rest
 }: CustomButtonProp) => {
   return (
@@ -19,14 +24,27 @@ const CustomButton = ({
       as="button"
       name={text}
       rounded="32px"
-      bgColor={variant === "solid" ? "brand.green" : "transparent"}
+      cursor={isDisabled ? "not-allowed" : "pointer"}
+      bgColor={
+        isDisabled
+          ? "#D3D3D3"
+          : variant === "solid"
+          ? "brand.green"
+          : "transparent"
+      }
       border={variant === "solid" ? "1px solid transparent" : "1px solid black"}
       color={variant === "solid" ? "white" : "black"}
       fontSize="14px"
       padding={{ base: "8px 24px 8px 24px", lg: "12px 24px 12px 24px" }}
       transition="all 0.3s ease-in-out"
       _hover={
-        variant === "solid"
+        isDisabled
+          ? {
+              border: "1px solid transparent",
+              textColor: "white",
+              bg: "#D3D3D3",
+            }
+          : variant === "solid"
           ? {
               border: "1px solid transparent",
               textColor: "white",
@@ -38,10 +56,10 @@ const CustomButton = ({
               bg: "brand.green",
             }
       }
-      onClick={onClick}
+      onClick={isDisabled ? (e) => e.preventDefault() : onClick}
       {...rest}
     >
-      {text}
+      {isLoading ? <CustomerLoader /> : text}
     </Box>
   );
 };
