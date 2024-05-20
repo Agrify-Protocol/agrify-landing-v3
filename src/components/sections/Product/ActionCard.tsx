@@ -4,7 +4,6 @@ import CustomButton from "@/components/common/CustomButton";
 import { pangaia, suisse } from "@/fonts";
 import { Box, Text } from "@chakra-ui/react";
 import Image, { StaticImageData } from "next/image";
-import "../animation.css";
 import handleScroll from "@/utils/handleScroll";
 
 interface ActionCardProps {
@@ -84,7 +83,6 @@ const ActionCard = ({ action, title, text, img, id }: ActionCardProps) => {
       >
         <Image
           src={img}
-          className={!isReversed ? "soft-bounce-reverse" : "soft-bounce"}
           alt={`${title} section img`}
           style={{ width: "auto", maxHeight: "100%" }}
         />

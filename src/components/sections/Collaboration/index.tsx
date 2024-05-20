@@ -105,7 +105,7 @@ const Collaboration = () => {
         <Box
           display="flex"
           justifyContent="space-between"
-          className="animate-marquee wave-animation"
+          className="animate-marquee"
           alignItems="center"
           gap={{ base: 0, lg: 8 }}
         >

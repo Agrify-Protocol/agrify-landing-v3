@@ -106,6 +106,7 @@ const Navbar = () => {
         onClose={() => setIsMenuOpen(false)}
         size="full"
         isFullHeight
+        placement="top"
       >
         <DrawerContent
           // background="rgba(245, 245, 247, 0.1)"
