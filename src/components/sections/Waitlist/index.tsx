@@ -6,6 +6,8 @@ import CustomButton from "@/components/common/CustomButton";
 import CustomInput from "@/components/common/CustomInput";
 import CountryModal from "./CountryModal";
 import useWaitlistLogic from "./controller/useWaitlistLogic";
+import close from "../../../../public/icons/hamburger-close.svg";
+import Image from "next/image";
 
 const Waitlist = () => {
   const {
@@ -14,11 +16,15 @@ const Waitlist = () => {
     handleInputOnchange,
     setOpenCountryModal,
     selectedCountry,
-    userDetails,
     isLoading,
     joinWaitList,
     openCountryModal,
     setSelectedCountry,
+    farmLocationModalOpen,
+    setFarmLocationModalOpen,
+    selectedFarmLocation,
+    setSelectedFarmLocation,
+    checkIfBtnDisabled,
   } = useWaitlistLogic();
 
   return (
@@ -49,6 +55,7 @@ const Waitlist = () => {
           onChange={(e) => {
             handleInputOnchange(e);
           }}
+          isLoading={isLoading}
         />
         <CustomInput
           label="Email Address"
@@ -56,9 +63,10 @@ const Waitlist = () => {
           type="email"
           placeholder="Enter email address"
           isInvalid={isInputInvalid.email}
-          errorMessage="email address must be valid."
+          errorMessage="Email address must be valid."
           onChange={(e) => handleInputOnchange(e)}
           setIsInputInvalid={setIsInputInvalid}
+          isLoading={isLoading}
         />
         <CustomInput
           label="Phone Number"
@@ -71,30 +79,71 @@ const Waitlist = () => {
           setOpenCountryModal={setOpenCountryModal}
           setIsInputInvalid={setIsInputInvalid}
           selectedCountry={selectedCountry}
+          isLoading={isLoading}
         />
-        <CustomInput
-          label="Farm Location"
-          id="farm_country"
-          placeholder="Enter Enter Country"
-          onChange={(e) => handleInputOnchange(e)}
-        />
+        <Box
+          onClick={() => (isLoading ? null : setFarmLocationModalOpen(true))}
+          cursor={isLoading ? "not-allowed" : "pointer"}
+        >
+          <Text mb={2}>Farm Location</Text>
+          <Box
+            bgColor="white"
+            display="flex"
+            alignItems="center"
+            boxSizing="border-box"
+            justifyContent="space-between"
+            rounded="16px"
+            border="1px solid #E2E8F0"
+            transition="all 0.1s ease-in-out"
+            _hover={{
+              border: "1px solid #C8C8C8",
+            }}
+            padding={3}
+          >
+            <Text
+              fontSize="14px"
+              color={
+                selectedFarmLocation.name.common ? "black" : "brand.darkGrey"
+              }
+            >
+              {selectedFarmLocation.name.common
+                ? selectedFarmLocation.name.common
+                : "Select your farm location"}
+            </Text>
+            {selectedFarmLocation.name.common ? (
+              <Box
+                maxW="20px"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  isLoading
+                    ? null
+                    : setSelectedFarmLocation({
+                        name: {
+                          common: "",
+                        },
+                      });
+                }}
+              >
+                <Image src={close} alt="close icon" />
+              </Box>
+            ) : null}
+          </Box>
+        </Box>
         <CustomInput
           label="Farm size (In Hectares)"
           id="farm_size"
           placeholder="Enter Farm size"
           isInvalid={isInputInvalid.farm_size}
-          errorMessage="Farm size must be numbers only."
+          errorMessage="Farm size must contain numbers only."
           onChange={(e) => handleInputOnchange(e)}
           setIsInputInvalid={setIsInputInvalid}
+          isLoading={isLoading}
         />
       </Stack>
       <CustomButton
         text="Join the Waitlist"
         variant="solid"
-        isDisabled={
-          Object.values(isInputInvalid).some((value) => value === true) ||
-          Object.values(userDetails).some((value) => value === "")
-        }
+        isDisabled={checkIfBtnDisabled()}
         w="100%"
         fontSize="16px"
         isLoading={isLoading}
@@ -111,6 +160,16 @@ const Waitlist = () => {
         onClose={() => setOpenCountryModal(false)}
         selectedCountry={selectedCountry}
         setSelectedCountry={setSelectedCountry}
+        title="Select a country"
+        name="country_code"
+      />
+      <CountryModal
+        isOpen={farmLocationModalOpen}
+        onClose={() => setFarmLocationModalOpen(false)}
+        selectedCountry={selectedFarmLocation}
+        setSelectedCountry={setSelectedFarmLocation}
+        title="Select your farm location"
+        name="farm_location"
       />
     </Box>
   );

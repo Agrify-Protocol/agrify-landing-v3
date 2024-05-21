@@ -30,7 +30,6 @@ const HowItWorks = () => {
       <Box
         w="231.82px"
         mb={{ base: "48px", lg: "91px" }}
-        className="soft-bounce"
       >
         <Image src={tech} alt="agrify technology img" />
       </Box>

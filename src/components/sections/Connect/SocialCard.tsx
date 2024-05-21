@@ -13,7 +13,7 @@ interface SocialCardProp {
 
 const SocialCard = ({ icon, text, link, rotation, hover }: SocialCardProp) => {
   return (
-    <Link href={link}>
+    <Link href={link} target="_blank">
       <Box
         display="flex"
         flexDir="column"

@@ -24,7 +24,7 @@ const CustomButton = ({
       as="button"
       name={text}
       rounded="32px"
-      cursor={isDisabled ? "not-allowed" : "pointer"}
+      cursor={isDisabled || isLoading ? "not-allowed" : "pointer"}
       bgColor={
         isDisabled
           ? "#D3D3D3"
@@ -56,7 +56,7 @@ const CustomButton = ({
               bg: "brand.green",
             }
       }
-      onClick={isDisabled ? (e) => e.preventDefault() : onClick}
+      onClick={isDisabled || isLoading ? (e) => e.preventDefault() : onClick}
       {...rest}
     >
       {isLoading ? <CustomerLoader /> : text}

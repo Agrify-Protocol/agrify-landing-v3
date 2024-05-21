@@ -6,6 +6,7 @@ import { Box, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import agrifyHero from "../../../../public/images/agrify.png";
 import agrifyHeroMobile from "../../../../public/images/agrify-mobile.png";
+import handleScroll from "@/utils/handleScroll";
 
 const Hero = () => {
   return (
@@ -35,7 +36,7 @@ const Hero = () => {
         <CustomButton
           text="Learn More"
           variant="solid"
-          onClick={() => null}
+          onClick={() => handleScroll("climate-change")}
           padding={{ base: "12px 24px 12px 24px" }}
         />
       </Box>

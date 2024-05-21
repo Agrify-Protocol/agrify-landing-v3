@@ -19,6 +19,7 @@ import hamburger from "../../../../public/icons/hamburger-open.svg";
 import hamburgerClose from "../../../../public/icons/hamburger-close.svg";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import '../../../components/sections/animation.css'
 
 const Navbar = () => {
   const menu = [
@@ -32,6 +33,14 @@ const Navbar = () => {
     },
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsMenuOpen(false);
+      setIsClosing(false);
+    }, 300); 
+  };
   const pathname = usePathname();
   const router = useRouter();
 
@@ -103,16 +112,12 @@ const Navbar = () => {
       </Box>
       <Drawer
         isOpen={isMenuOpen}
-        onClose={() => setIsMenuOpen(false)}
+        onClose={handleClose}
         size="full"
         isFullHeight
         placement="top"
       >
-        <DrawerContent
-          // background="rgba(245, 245, 247, 0.1)"
-          // backdropFilter="blur(50px)"
-          boxShadow="none"
-        >
+        <DrawerContent className={`drawer-content ${isClosing ? 'closing' : ''}`} boxShadow="none">
           <DrawerBody px={4} pt={6} pb={4}>
             <Box
               justifyContent="space-between"
@@ -120,7 +125,7 @@ const Navbar = () => {
               display="flex"
               mb="56px"
             >
-              <Box py={2} onClick={() => setIsMenuOpen(false)}>
+              <Box py={2} onClick={handleClose}>
                 <Image src={hamburgerClose} alt="close hamburger menu icon" />
               </Box>
               <Link href="/" style={{ width: "91.81px", outline: "none" }}>

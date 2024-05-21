@@ -13,9 +13,21 @@ import Navbar from "@/components/common/Navbar";
 
 const WaitlistConfirmed = () => {
   const icons = [
-    { icon: twitter, link: "#", name: "twitter" },
-    { icon: instagram, link: "#", name: "instagram" },
-    { icon: telegram, link: "#", name: "telegram" },
+    {
+      icon: twitter,
+      link: "https://twitter.com/agrifyafrica",
+      name: "twitter",
+    },
+    {
+      icon: instagram,
+      link: "https://www.instagram.com/agrifyafrica/",
+      name: "instagram",
+    },
+    {
+      icon: telegram,
+      link: "https://t.me/+LzukavSm-9MxY2Y8",
+      name: "telegram",
+    },
   ];
 
   return (
@@ -66,7 +78,12 @@ const WaitlistConfirmed = () => {
             justifyContent="center"
           >
             {icons.map((item) => (
-              <Link key={item.name} href={item.link} className="social-icons">
+              <Link
+                key={item.name}
+                href={item.link}
+                className="social-icons"
+                target="_blank"
+              >
                 <Image src={item.icon} alt={`${item.name} social logo`} />
               </Link>
             ))}

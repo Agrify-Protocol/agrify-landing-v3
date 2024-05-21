@@ -109,7 +109,7 @@ const Collaboration = () => {
           alignItems="center"
           gap={{ base: 0, lg: 8 }}
         >
-          {Array.from({ length: 3 }, () => collaborators)
+          {Array.from({ length: 10 }, () => collaborators)
             .flat()
             .map((item, index) => (
               <Box

@@ -3,6 +3,7 @@ import { Box, InputGroup, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import "./input.css";
 import getCountryCodeValue from "@/components/sections/Waitlist/controller/getCountryCodeValue";
+import getBorderColor from "@/utils/getBorderColor";
 
 interface CustomInputProp {
   label: string;
@@ -15,6 +16,7 @@ interface CustomInputProp {
   setOpenCountryModal?: React.Dispatch<React.SetStateAction<boolean>>;
   selectedCountry?: any;
   setIsInputInvalid?: React.Dispatch<React.SetStateAction<any>>;
+  isLoading: boolean;
 }
 const CustomInput = ({
   label,
@@ -27,18 +29,9 @@ const CustomInput = ({
   errorMessage,
   selectedCountry,
   setIsInputInvalid,
+  isLoading,
 }: CustomInputProp) => {
   const [telInputActive, setTelInputActive] = useState(false);
-
-  const getBorderColor = () => {
-    if (isInvalid) {
-      return "1px solid #dc143c";
-    } else if (telInputActive) {
-      return "1px solid #C8C8C8";
-    } else {
-      return "1px solid #E2E8F0";
-    }
-  };
 
   return (
     <InputGroup
@@ -70,6 +63,7 @@ const CustomInput = ({
               setIsInputInvalid &&
               setIsInputInvalid((prev: any) => ({ ...prev, [id]: false }))
             }
+            readOnly={isLoading}
           />
           {isInvalid ? (
             <Text fontSize="12px" color="#dc143c">
@@ -85,7 +79,7 @@ const CustomInput = ({
             alignItems="center"
             boxSizing="border-box"
             rounded="16px"
-            border={getBorderColor()}
+            border={getBorderColor(isInvalid, telInputActive)}
             transition="all 0.1s ease-in-out"
             _hover={{
               border: isInvalid ? "1px solid #dc143c" : "1px solid #C8C8C8",
@@ -94,7 +88,11 @@ const CustomInput = ({
           >
             <button
               type="button"
-              onClick={() => setOpenCountryModal && setOpenCountryModal(true)}
+              onClick={() =>
+                isLoading
+                  ? null
+                  : setOpenCountryModal && setOpenCountryModal(true)
+              }
               style={{
                 fontSize: "24px",
                 outline: "none",
@@ -102,7 +100,7 @@ const CustomInput = ({
                 alignItems: "center",
                 backgroundColor: "white",
                 borderRadius: "16px",
-                cursor: "pointer",
+                cursor: isLoading ? "not-allowed" : "pointer",
               }}
             >
               {selectedCountry.flag}
@@ -132,6 +130,7 @@ const CustomInput = ({
               }}
               type={type}
               onChange={onChange}
+              readOnly={isLoading}
             />
           </Box>
           {isInvalid ? (

@@ -14,6 +14,6 @@ export function validatePhoneNumber(str: string) {
 }
 
 export function validateFarmSize(str: string) {
-  const regex = /^[0-9]+$/;
+  const regex = /^[1-9][0-9]*$/;
   return !regex.test(str);
 }
