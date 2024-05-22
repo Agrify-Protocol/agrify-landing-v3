@@ -90,12 +90,12 @@ const useWaitlistLogic = () => {
       axios
         .post(process.env.NEXT_PUBLIC_JOIN_WAITLIST, newUserDetails)
         .then((response) => {
-          console.log('response', response)
           if (response?.status <= 400) {
             toast({
               title: "Success!",
               position: "top-right",
-              description: "You've been added to our waitlist.",
+              description:
+                response?.data?.message ?? "You've been added to our waitlist.",
               status: "success",
               duration: 9000,
               isClosable: true,
@@ -123,7 +123,8 @@ const useWaitlistLogic = () => {
           toast({
             title: "Error!",
             position: "top-right",
-            description: error?.response?.data?.message ?? "Something went wrong",
+            description:
+              error?.response?.data?.message ?? "Something went wrong",
             status: "error",
             duration: 9000,
             isClosable: true,
