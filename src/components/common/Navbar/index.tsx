@@ -19,7 +19,7 @@ import hamburger from "../../../../public/icons/hamburger-open.svg";
 import hamburgerClose from "../../../../public/icons/hamburger-close.svg";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import '../../../components/sections/animation.css'
+import "../../../components/sections/animation.css";
 
 const Navbar = () => {
   const menu = [
@@ -39,7 +39,7 @@ const Navbar = () => {
     setTimeout(() => {
       setIsMenuOpen(false);
       setIsClosing(false);
-    }, 300); 
+    }, 300);
   };
   const pathname = usePathname();
   const router = useRouter();
@@ -117,7 +117,10 @@ const Navbar = () => {
         isFullHeight
         placement="top"
       >
-        <DrawerContent className={`drawer-content ${isClosing ? 'closing' : ''}`} boxShadow="none">
+        <DrawerContent
+          className={`drawer-content ${isClosing ? "closing" : ""}`}
+          boxShadow="none"
+        >
           <DrawerBody px={4} pt={6} pb={4}>
             <Box
               justifyContent="space-between"
@@ -149,7 +152,7 @@ const Navbar = () => {
                   color="brand.mainBlack"
                   cursor="pointer"
                   onClick={() => {
-                    setIsMenuOpen(false);
+                    handleClose();
                     pathname.includes("/waitlist-confirmed")
                       ? router.push("/")
                       : handleScroll("climate-change");

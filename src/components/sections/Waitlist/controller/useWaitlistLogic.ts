@@ -2,7 +2,7 @@
 
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 import countryList from "../../../../const/countryList.json";
 import getCountryCodeValue from "./getCountryCodeValue";
 import axios from "axios";
@@ -86,53 +86,53 @@ const useWaitlistLogic = () => {
       phone_number: `${getCountryCodeValue(selectedCountry?.idd)}${userNumber}`,
       farm_country: selectedFarmLocation.name.common,
     };
-    console.log("newUserDetails", newUserDetails);
-    // if (process.env.NEXT_PUBLIC_JOIN_WAITLIST) {
-    //   axios
-    //     .post(process.env.NEXT_PUBLIC_JOIN_WAITLIST, newUserDetails)
-    //     .then((response) => {
-    //       if (response?.status <= 400) {
-    //         toast({
-    //           title: "Success!",
-    //           position: "top-right",
-    //           description: "You've been added to our waitlist.",
-    //           status: "success",
-    //           duration: 9000,
-    //           isClosable: true,
-    //         });
-    //         setUserDetails({
-    //           full_name: "",
-    //           phone_number: "",
-    //           email: "",
-    //           farm_country: "",
-    //           farm_size: "",
-    //         });
-    //         router.push("/waitlist-confirmed");
-    //       } else {
-    //         toast({
-    //           title: "Error!",
-    //           position: "top-right",
-    //           description: response?.data?.message ?? "Something went wrong.",
-    //           status: "error",
-    //           duration: 9000,
-    //           isClosable: true,
-    //         });
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       toast({
-    //         title: "Error!",
-    //         position: "top-right",
-    //         description: error?.response?.data?.error ?? "Something went wrong",
-    //         status: "error",
-    //         duration: 9000,
-    //         isClosable: true,
-    //       });
-    //     })
-    //     .finally(() => {
-    //       setIsLoading(false);
-    //     });
-    // }
+    if (process.env.NEXT_PUBLIC_JOIN_WAITLIST) {
+      axios
+        .post(process.env.NEXT_PUBLIC_JOIN_WAITLIST, newUserDetails)
+        .then((response) => {
+          console.log('response', response)
+          if (response?.status <= 400) {
+            toast({
+              title: "Success!",
+              position: "top-right",
+              description: "You've been added to our waitlist.",
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+            setUserDetails({
+              full_name: "",
+              phone_number: "",
+              email: "",
+              farm_country: "",
+              farm_size: "",
+            });
+            router.push("/waitlist-confirmed");
+          } else {
+            toast({
+              title: "Error!",
+              position: "top-right",
+              description: response?.data?.message ?? "Something went wrong.",
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+          }
+        })
+        .catch((error) => {
+          toast({
+            title: "Error!",
+            position: "top-right",
+            description: error?.response?.data?.message ?? "Something went wrong",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
   };
 
   const checkIfBtnDisabled = () => {
