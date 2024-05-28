@@ -4,6 +4,7 @@ import CustomButton from "@/components/common/CustomButton";
 import SectionButton from "@/components/common/SectionButton";
 import { pangaia, suisse } from "@/fonts";
 import { Box, Text } from "@chakra-ui/react";
+import Link from "next/link";
 
 const Partners = () => {
   return (
@@ -36,11 +37,13 @@ const Partners = () => {
           Imagery, Blockchain and more so that farmers can stand a chance in the
           battle against climate change.
         </Text>
-        <CustomButton
-          text="See our deck"
-          variant="outline"
-          onClick={() => null}
-        />
+        <Link href="https://docsend.com/view/iecvqc3pyv8u562q" target="_blank">
+          <CustomButton
+            text="See our deck"
+            variant="outline"
+            onClick={() => null}
+          />
+        </Link>
       </Box>
     </Box>
   );
