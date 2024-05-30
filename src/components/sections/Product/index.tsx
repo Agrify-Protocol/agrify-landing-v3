@@ -10,7 +10,7 @@ const Product = () => {
   const cards = [
     {
       action: "Learn",
-      title: "with AI Powered Insights",
+      title: "Insights In local languages",
       text: "Gain farming intelligence with our AI powered Regenerative Score, that gives you tasks to accomplish in order to verify that your farming practices have sequestered carbon and avoided deforestation, improving crop yield and likelihood of finding produce buyers. ",
       img: learn,
     },
@@ -22,8 +22,8 @@ const Product = () => {
     },
     {
       action: "Turn",
-      title: "into an export powerhouse",
-      text: "Reach buyers all around interested in decarbonising their supply chains through supply insetting. By proving your farm has captured carbon and avoided deforestation you can increase the likelihood of gaining certificates to export to numerous countries globally.",
+      title: "into a global exporter",
+      text: "Reach buyers all around interested in decarbonising their supply chains through supply insetting. By proving your farm has captured carbon and avoided deforestation you can increase the likelihood of gaining certificates to export to numerous countries.",
       img: turn,
     },
   ];
