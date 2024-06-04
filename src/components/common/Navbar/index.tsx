@@ -22,14 +22,15 @@ import { usePathname, useRouter } from "next/navigation";
 import "../../../components/sections/animation.css";
 
 const Navbar = () => {
+  const router = useRouter();
   const menu = [
     {
       title: "About",
-      path: "#",
+      action: () => handleScroll("climate-change"),
     },
     {
       title: "For Businesses",
-      path: "#",
+      action: () => router.push("/business"),
     },
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,7 +43,6 @@ const Navbar = () => {
     }, 300);
   };
   const pathname = usePathname();
-  const router = useRouter();
 
   return (
     <>
@@ -74,7 +74,7 @@ const Navbar = () => {
                 }}
                 color="brand.mainBlack"
                 cursor="pointer"
-                onClick={() => handleScroll("climate-change")}
+                onClick={item.action}
               >
                 <Text>{item.title}</Text>
               </List>
