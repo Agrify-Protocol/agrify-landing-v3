@@ -18,6 +18,7 @@ interface CustomInputProp {
   setIsInputInvalid?: React.Dispatch<React.SetStateAction<any>>;
   isLoading: boolean;
 }
+
 const CustomInput = ({
   label,
   id,
