@@ -18,7 +18,7 @@ const CalculatorLayout = ({ children }: CalculatorLayoutProp) => {
         bgRepeat="repeat"
         minHeight="85vh"
         bgPosition="center"
-        m="8px 24px 0px 12px"
+        m="8px 24px 0px 24px"
         rounded="24px"
         pb={10}
       >

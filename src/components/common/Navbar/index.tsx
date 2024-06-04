@@ -151,12 +151,7 @@ const Navbar = () => {
                   }}
                   color="brand.mainBlack"
                   cursor="pointer"
-                  onClick={() => {
-                    handleClose();
-                    pathname.includes("/waitlist-confirmed")
-                      ? router.push("/")
-                      : handleScroll("climate-change");
-                  }}
+                  onClick={item.action}
                 >
                   <Text>{item.title}</Text>
                 </List>
