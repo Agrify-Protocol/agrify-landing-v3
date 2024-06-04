@@ -42,7 +42,6 @@ const useCarbonCalculatorLogic = () => {
   ];
 
   const onChange = (e: { target: { name: string; value: string } }) => {
-    console.log("e.target.name", e.target.name);
     setDetails((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     if (e.target.name === "email") {
       setIsInputInvalid((prev) => ({
@@ -173,7 +172,7 @@ const useCarbonCalculatorLogic = () => {
             </Carousel>
           ),
           btn: btn,
-          isDisabled: details?.food === "" || isInputInvalid.food,
+          isDisabled: false,
         };
       default:
         return { body: null, btn: btn, isDisabled: false };
