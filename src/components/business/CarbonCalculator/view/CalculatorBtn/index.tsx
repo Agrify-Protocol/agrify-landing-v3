@@ -24,9 +24,7 @@ const CalculatorBtn = ({
       name={text}
       rounded="32px"
       cursor={isDisabled || isLoading ? "not-allowed" : "pointer"}
-      bgColor={
-        isDisabled ? "#EEEEEE" : text === "Back" ? "#EEEEEE" : "brand.green"
-      }
+      bgColor={isDisabled || text === "Back" ? "#EEEEEE" : "brand.green"}
       color={isDisabled || text === "Back" ? "black" : "white"}
       fontSize="14px"
       padding="6px 12px"
