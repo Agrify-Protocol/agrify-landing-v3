@@ -14,7 +14,7 @@ import food from "../../../../../public/icons/calculator/food.svg";
 import electricity from "../../../../../public/icons/calculator/electricity.svg";
 
 const useCarbonCalculatorLogic = () => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
   const [details, setDetails] = useState({
     email: "",
     country: countryList[0],

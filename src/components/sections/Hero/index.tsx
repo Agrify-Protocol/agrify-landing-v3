@@ -30,7 +30,7 @@ const Hero = () => {
           mb={6}
           as="h2"
         >
-          Helping Farmers improve yield, access debt free finance and qualify
+          Helping Farmers improve yield, earn carbon income and qualify
           for international exports
         </Text>
         <CustomButton
