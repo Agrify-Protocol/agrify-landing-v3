@@ -4,7 +4,7 @@ import { Providers } from "./providers";
 export const metadata: Metadata = {
   title: "Agrify",
   description:
-    "Helping Farmers improve yield, access debt free finance and qualify for international exports",
+    "Helping Farmers improve yield, earn carbon income and qualify for international exports",
 };
 
 export default function RootLayout({

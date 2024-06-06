@@ -2,9 +2,7 @@
 
 import CustomerLoader from "@/components/common/CustomLoader";
 import { Box, BoxProps } from "@chakra-ui/react";
-import activeArrow from "../../../../../../public/icons/active-arrow.svg";
-import inactiveArrow from "../../../../../../public/icons/inactive-arrow.svg";
-import Image from "next/image";
+import Arrow from "../../../../../../public/icons/Arrow";
 
 interface CalculatorBtnProp extends BoxProps {
   text: string;
@@ -26,21 +24,27 @@ const CalculatorBtn = ({
       name={text}
       rounded="32px"
       cursor={isDisabled || isLoading ? "not-allowed" : "pointer"}
-      bgColor={isDisabled ? "#EEEEEE" : "brand.green"}
-      color={isDisabled ? "black" : "white"}
+      bgColor={isDisabled || text === "Back" ? "#EEEEEE" : "brand.green"}
+      color={isDisabled || text === "Back" ? "black" : "white"}
       fontSize="14px"
       padding="6px 12px"
       transition="all 0.3s ease-in-out"
       display="flex"
+      flexDir={text === "Back" ? "row-reverse" : "row"}
       gap="12px"
-      _hover={isDisabled ? "" : { bg: "#0A9B3C" }}
+      _hover={
+        isDisabled
+          ? ""
+          : text === "Back"
+          ? { bgColor: "#d9d9d9" }
+          : { bgColor: "#0A9B3C" }
+      }
       onClick={isDisabled || isLoading ? (e) => e.preventDefault() : onClick}
       {...rest}
     >
       {isLoading ? <CustomerLoader /> : text}
-      <Image
-        src={isDisabled ? inactiveArrow : activeArrow}
-        alt="arrow icon"
+      <Arrow
+        color={isDisabled ? "#EEEEEE" : text === "Back" ? "#A6A6A6" : "#0CC14C"}
         style={{ rotate: text === "Back" ? "180deg" : "" }}
       />
     </Box>
