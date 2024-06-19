@@ -12,6 +12,7 @@ import {
   validateNameInput,
   validatePhoneNumber,
 } from "@/utils/validationSchema";
+import { sendGAEvent } from '@next/third-parties/google'
 
 interface UserDetailsProp {
   full_name: string;
@@ -76,6 +77,7 @@ const useWaitlistLogic = () => {
   };
 
   const joinWaitList = () => {
+    sendGAEvent("event", "join-waitlist", { value: "join" });
     setIsLoading(true);
     const userNumber =
       userDetails.phone_number.charAt(0) === "0"
