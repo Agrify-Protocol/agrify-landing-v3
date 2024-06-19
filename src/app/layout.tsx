@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Providers } from "./providers";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "Agrify",
@@ -17,6 +18,9 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/icons/logo.svg" type="image/svg+xml" />
       </head>
+      {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+      ) : null}
       <body>
         <Providers>{children}</Providers>
       </body>

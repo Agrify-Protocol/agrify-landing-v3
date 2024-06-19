@@ -5,6 +5,7 @@ import SectionButton from "@/components/common/SectionButton";
 import { pangaia, suisse } from "@/fonts";
 import { Box, Text } from "@chakra-ui/react";
 import Link from "next/link";
+import { sendGAEvent } from "@next/third-parties/google";
 
 const Partners = () => {
   return (
@@ -37,7 +38,13 @@ const Partners = () => {
           Imagery, Blockchain and more so that farmers can stand a chance in the
           battle against climate change.
         </Text>
-        <Link href="https://docsend.com/view/iecvqc3pyv8u562q" target="_blank">
+        <Link
+          href="https://docsend.com/view/iecvqc3pyv8u562q"
+          target="_blank"
+          onClick={() =>
+            sendGAEvent("event", "see-our-deck", { value: "view" })
+          }
+        >
           <CustomButton
             text="See our deck"
             variant="outline"

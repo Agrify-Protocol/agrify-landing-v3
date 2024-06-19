@@ -1,7 +1,10 @@
+"use client";
+
 import { Box, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { suisse } from "@/fonts";
 import Link from "next/link";
+import { sendGAEvent } from "@next/third-parties/google";
 
 interface SocialCardProp {
   icon: string;
@@ -13,7 +16,13 @@ interface SocialCardProp {
 
 const SocialCard = ({ icon, text, link, rotation, hover }: SocialCardProp) => {
   return (
-    <Link href={link} target="_blank">
+    <Link
+      href={link}
+      target="_blank"
+      onClick={() =>
+        sendGAEvent("event", "connect-with-us", { value: text.toLowerCase() })
+      }
+    >
       <Box
         display="flex"
         flexDir="column"

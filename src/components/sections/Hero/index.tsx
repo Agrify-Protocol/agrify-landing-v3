@@ -7,6 +7,7 @@ import Image from "next/image";
 import agrifyHero from "../../../../public/images/agrify.png";
 import agrifyHeroMobile from "../../../../public/images/agrify-mobile.png";
 import handleScroll from "@/utils/handleScroll";
+import { sendGAEvent } from "@next/third-parties/google";
 
 const Hero = () => {
   return (
@@ -30,13 +31,16 @@ const Hero = () => {
           mb={6}
           as="h2"
         >
-          Helping Farmers improve yield, earn carbon income and qualify
-          for international exports
+          Helping Farmers improve yield, earn carbon income and qualify for
+          international exports
         </Text>
         <CustomButton
           text="Learn More"
           variant="solid"
-          onClick={() => handleScroll("climate-change")}
+          onClick={() => {
+            handleScroll("climate-change");
+            sendGAEvent("event", "learn-more", { value: "view" });
+          }}
           padding={{ base: "12px 24px 12px 24px" }}
         />
       </Box>

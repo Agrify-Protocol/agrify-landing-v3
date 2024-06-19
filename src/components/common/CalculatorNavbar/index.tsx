@@ -46,6 +46,8 @@ const CalculatorNavbar = () => {
               rounded="28px"
               p="12px 24px"
               transition="all 0.2s ease-in-out"
+              outline="none"
+              _active={index > 1 ? "transparent" : ""}
               background={index === 1 ? "#ececee" : "transparent"}
               fontFamily={suisse.style.fontFamily}
               _hover={{

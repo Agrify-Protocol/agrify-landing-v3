@@ -49,7 +49,7 @@ const useCarbonCalculatorLogic = () => {
         email: validateEmail(e.target.value),
       }));
     } else if (
-      ["transportation", "waste", "electricity"].includes(e.target.name)
+      ["transportation", "waste", "electricity", "food"].includes(e.target.name)
     ) {
       setIsInputInvalid((prev) => ({
         ...prev,
