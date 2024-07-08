@@ -28,10 +28,10 @@ const Navbar = () => {
       title: "About",
       action: () => handleScroll("climate-change"),
     },
-    {
-      title: "For Businesses",
-      action: () => router.push("/business"),
-    },
+    // {
+    //   title: "For Businesses",
+    //   action: () => router.push("/business"),
+    // },
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
