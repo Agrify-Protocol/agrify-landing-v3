@@ -13,26 +13,21 @@ import Image from "next/image";
 import logo from "../../../../public/icons/logo.svg";
 import Link from "next/link";
 import { suisse } from "@/fonts";
-import CustomButton from "../CustomButton";
-import handleScroll from "@/utils/handleScroll";
 import hamburger from "../../../../public/icons/hamburger-open.svg";
 import hamburgerClose from "../../../../public/icons/hamburger-close.svg";
 import { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import "../../../components/sections/animation.css";
 
-const Navbar = () => {
-  const router = useRouter();
-  const menu = [
-    {
-      title: "About",
-      action: () => handleScroll("climate-change"),
-    },
-    // {
-    //   title: "For Businesses",
-    //   action: () => router.push("/business"),
-    // },
-  ];
+interface NavbarProps {
+  menu: {
+    title: string;
+    action: () => void;
+  }[];
+  btn: React.ReactNode;
+}
+
+const Navbar = ({ menu, btn }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const handleClose = () => {
@@ -60,7 +55,7 @@ const Navbar = () => {
         backdropFilter="blur(12px)"
         zIndex={10}
       >
-        <Link href="/" style={{ outline: "none" }}>
+        <Link href="/" style={{ outline: "none", display: "block", width: "fit-content" }}>
           <Image src={logo} alt="agrify logo icon" />
         </Link>
         <Box>
@@ -81,12 +76,9 @@ const Navbar = () => {
             ))}
           </UnorderedList>
         </Box>
-        <CustomButton
-          text="Join the Waitlist"
-          onClick={() => handleScroll("join-waitlist")}
-        />
+        {btn}
       </Box>
-      <Box
+      {menu.length ?  <Box
         px={4}
         pt={6}
         pb={4}
@@ -102,14 +94,8 @@ const Navbar = () => {
         <Box py={2} onClick={() => setIsMenuOpen(true)}>
           <Image src={hamburger} alt="hamburger menu icon" />
         </Box>
-        {pathname.includes("/waitlist-confirmed") ? null : (
-          <CustomButton
-            text="Join the waitlist"
-            variant="outline"
-            onClick={() => handleScroll("join-waitlist")}
-          />
-        )}
-      </Box>
+        {pathname.includes("/waitlist-confirmed") ? null : btn}
+      </Box> : null }
       <Drawer
         isOpen={isMenuOpen}
         onClose={handleClose}
@@ -131,7 +117,7 @@ const Navbar = () => {
               <Box py={2} onClick={handleClose}>
                 <Image src={hamburgerClose} alt="close hamburger menu icon" />
               </Box>
-              <Link href="/" style={{ width: "91.81px", outline: "none" }}>
+              <Link href="/" style={{ width: "91.81px", outline: "none", display: "block" }}>
                 <Image src={logo} alt="agrify logo icon" />
               </Link>
             </Box>
@@ -151,7 +137,10 @@ const Navbar = () => {
                   }}
                   color="brand.mainBlack"
                   cursor="pointer"
-                  onClick={item.action}
+                  onClick={() => {
+                    item.action();
+                    handleClose();
+                  }}
                 >
                   <Text>{item.title}</Text>
                 </List>

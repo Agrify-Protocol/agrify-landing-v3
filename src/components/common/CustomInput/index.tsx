@@ -17,6 +17,7 @@ interface CustomInputProp {
   selectedCountry?: any;
   setIsInputInvalid?: React.Dispatch<React.SetStateAction<any>>;
   isLoading: boolean;
+  options?: string[];
 }
 
 const CustomInput = ({
@@ -31,6 +32,7 @@ const CustomInput = ({
   selectedCountry,
   setIsInputInvalid,
   isLoading,
+  options,
 }: CustomInputProp) => {
   const [telInputActive, setTelInputActive] = useState(false);
 
@@ -45,34 +47,7 @@ const CustomInput = ({
       <Text as="label" htmlFor={id}>
         {label}
       </Text>
-      {type !== "tel" ? (
-        <Box>
-          <input
-            className={`custom-text-input ${
-              isInvalid ? "error-text-input-border" : "text-input-border"
-            }`}
-            style={{
-              transition: "all 0.1s ease-in-out",
-              width: "100%",
-            }}
-            id={id}
-            name={id}
-            placeholder={placeholder}
-            type={type}
-            onChange={onChange}
-            onBlur={() =>
-              setIsInputInvalid &&
-              setIsInputInvalid((prev: any) => ({ ...prev, [id]: false }))
-            }
-            readOnly={isLoading}
-          />
-          {isInvalid ? (
-            <Text fontSize="12px" color="#dc143c">
-              {errorMessage}
-            </Text>
-          ) : null}
-        </Box>
-      ) : (
+      {type === "tel" ? (
         <>
           <Box
             bgColor="white"
@@ -140,7 +115,94 @@ const CustomInput = ({
             </Text>
           ) : null}
         </>
-      )}
+      ) : null}
+      {["text", "email"].includes(type) ? (
+        <Box>
+          <input
+            className={`custom-text-input ${
+              isInvalid ? "error-text-input-border" : "text-input-border"
+            }`}
+            style={{
+              transition: "all 0.1s ease-in-out",
+              width: "100%",
+            }}
+            id={id}
+            name={id}
+            placeholder={placeholder}
+            type={type}
+            onChange={onChange}
+            onBlur={() =>
+              setIsInputInvalid &&
+              setIsInputInvalid((prev: any) => ({ ...prev, [id]: false }))
+            }
+            readOnly={isLoading}
+          />
+          {isInvalid ? (
+            <Text fontSize="12px" color="#dc143c">
+              {errorMessage}
+            </Text>
+          ) : null}
+        </Box>
+      ) : null}
+      {type === "select" ? (
+        <Box>
+          <select
+            className={`custom-text-input ${
+              isInvalid ? "error-text-input-border" : "text-input-border"
+            }`}
+            style={{
+              transition: "all 0.1s ease-in-out",
+              width: "100%",
+            }}
+            id={id}
+            name={id}
+            disabled={isLoading}
+            onChange={onChange}
+            onBlur={() =>
+              setIsInputInvalid &&
+              setIsInputInvalid((prev: any) => ({ ...prev, [id]: false }))
+            }
+          >
+            {options?.map((item) => (
+              <option key={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+          {isInvalid ? (
+            <Text fontSize="12px" color="#dc143c">
+              {errorMessage}
+            </Text>
+          ) : null}
+        </Box>
+      ) : null}
+      {type === "text-area" ? (
+        <Box>
+          <textarea
+            className={`custom-text-input ${
+              isInvalid ? "error-text-input-border" : "text-input-border"
+            }`}
+            style={{
+              transition: "all 0.1s ease-in-out",
+              width: "100%",
+            }}
+            id={id}
+            name={id}
+            placeholder={placeholder}
+            onChange={onChange}
+            onBlur={() =>
+              setIsInputInvalid &&
+              setIsInputInvalid((prev: any) => ({ ...prev, [id]: false }))
+            }
+            readOnly={isLoading}
+          />
+          {isInvalid ? (
+            <Text fontSize="12px" color="#dc143c">
+              {errorMessage}
+            </Text>
+          ) : null}
+        </Box>
+      ) : null}
     </InputGroup>
   );
 };

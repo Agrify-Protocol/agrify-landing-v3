@@ -34,7 +34,7 @@ const CalculatorNavbar = () => {
         backdropFilter="blur(12px)"
         zIndex={10}
       >
-        <Link href="/" style={{ outline: "none" }}>
+        <Link href="/" style={{ outline: "none", display: "block", width: "fit-content" }}>
           <Image src={logo} alt="agrify logo icon" />
         </Link>
         <Box>

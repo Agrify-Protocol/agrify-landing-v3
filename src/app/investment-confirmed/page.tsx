@@ -1,10 +1,15 @@
 import twitter from "../../../public/icons/socials/twitter.svg";
 import instagram from "../../../public/icons/socials/instagram.svg";
-import telegram from "../../../public/icons/socials/telegram.svg";
+import linkedin from "../../../public/icons/socials/linkedin.svg";
 import Success from "@/components/success/page";
 
-const WaitlistConfirmed = () => {
+const InvestmentConfirmed = () => {
   const icons = [
+    {
+      icon: linkedin,
+      link: "https://www.linkedin.com/company/agrify-technologies/",
+      name: "linkedin",
+    },
     {
       icon: twitter,
       link: "https://twitter.com/agrifyafrica",
@@ -15,21 +20,16 @@ const WaitlistConfirmed = () => {
       link: "https://www.instagram.com/agrifyafrica/",
       name: "instagram",
     },
-    {
-      icon: telegram,
-      link: "https://t.me/+LzukavSm-9MxY2Y8",
-      name: "telegram",
-    },
   ];
 
   return (
     <Success
       socials={icons}
-      logoLink="/"
-      title="You are on the waitlist!"
-      subtitle="Stay updated on our ecosystem to learn about new product updates"
+      logoLink="/business"
+      title="We have received your information!"
+      subtitle="Stay updated on our ecosystem to learn about product updates."
     />
   );
 };
 
-export default WaitlistConfirmed;
+export default InvestmentConfirmed;

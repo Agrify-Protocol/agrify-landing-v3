@@ -10,7 +10,7 @@ import useCarbonCalculatorLogic from "./controller/useCarbonCalculatorLogic";
 const CarbonCalculator = () => {
   const { step, currentBody } = useCarbonCalculatorLogic();
   return (
-    <CalculatorLayout>
+    <CalculatorLayout step={step}>
       <AnimatePresence initial={false} custom={step}>
         {currentBody()?.body}
       </AnimatePresence>
