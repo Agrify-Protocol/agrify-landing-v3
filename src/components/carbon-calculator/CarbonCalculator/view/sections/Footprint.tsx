@@ -10,31 +10,27 @@ import { useRouter } from "next/navigation";
 
 interface FootprintProps {
   email: string;
-  result: any
+  result: any;
 }
 
 const Footprint = ({ email, result }: FootprintProps) => {
-  console.log('result', result)
+  const { emission } = result;
   const cards = [
     {
       icon: transporation,
       title: "Transportation",
-      value: "200 tonnes C02/year",
     },
     {
       icon: waste,
       title: "Waste",
-      value: "200 tonnes C02/year",
     },
     {
       icon: electricity,
       title: "Electricity",
-      value: "200 tonnes C02/year",
     },
     {
       icon: food,
       title: "Meals",
-      value: "200 tonnes C02/year",
     },
   ];
 
@@ -46,7 +42,7 @@ const Footprint = ({ email, result }: FootprintProps) => {
           Your Carbon Footprint
         </Text>
         <Text fontSize="24px" fontWeight="500" letterSpacing="-2%">
-          200 tonnes C02/year
+          {Number(emission).toLocaleString()} tonnes C02/year
         </Text>
       </Box>
       <Box my={10} display="flex" flexDir="column" gap={2}>
@@ -67,7 +63,7 @@ const Footprint = ({ email, result }: FootprintProps) => {
                 {item.title}
               </Text>
             </Box>
-            <Text>{item.value}</Text>
+            <Text>{Number(emission).toLocaleString()} tonnes C02/year</Text>
           </Box>
         ))}
       </Box>
