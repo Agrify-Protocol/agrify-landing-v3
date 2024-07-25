@@ -6,10 +6,10 @@ import CountryModal from "@/components/sections/Waitlist/CountryModal";
 interface DetailsObj {
   email: string;
   country: any;
-  transportation: string;
+  distance: string;
   waste: string;
   electricity: string;
-  food: string;
+  meal: string;
 }
 
 export interface CalculatorDetailsProp {

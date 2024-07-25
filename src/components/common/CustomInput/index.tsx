@@ -11,7 +11,8 @@ interface CustomInputProp {
   placeholder: string;
   type?: string;
   isInvalid?: boolean;
-  errorMessage?: string;
+  errorMessage?: string
+  value: any;
   onChange: (e?: any) => void;
   setOpenCountryModal?: React.Dispatch<React.SetStateAction<boolean>>;
   selectedCountry?: any;
@@ -33,6 +34,7 @@ const CustomInput = ({
   setIsInputInvalid,
   isLoading,
   options,
+  value,
 }: CustomInputProp) => {
   const [telInputActive, setTelInputActive] = useState(false);
 
@@ -87,6 +89,7 @@ const CustomInput = ({
             <input
               id={id}
               name={id}
+              value={value}
               placeholder={placeholder}
               style={{
                 marginLeft: "8px",
@@ -130,6 +133,7 @@ const CustomInput = ({
             name={id}
             placeholder={placeholder}
             type={type}
+            value={value}
             onChange={onChange}
             onBlur={() =>
               setIsInputInvalid &&
@@ -158,6 +162,7 @@ const CustomInput = ({
             name={id}
             disabled={isLoading}
             onChange={onChange}
+            value={value}
             onBlur={() =>
               setIsInputInvalid &&
               setIsInputInvalid((prev: any) => ({ ...prev, [id]: false }))
@@ -188,6 +193,7 @@ const CustomInput = ({
             }}
             id={id}
             name={id}
+            value={value}
             placeholder={placeholder}
             onChange={onChange}
             onBlur={() =>

@@ -13,7 +13,7 @@ const SolutionCard = ({ index, title, text, img }: SolutionCardProp) => {
   return (
     <Box
       backgroundColor="brand.lightGrey"
-      padding="18px 38px"
+      padding={{ base: "24px 16px", lg: "18px 38px" }}
       rounded="24px"
       display="flex"
       justifyContent={{ base: "center", lg: "space-between" }}
@@ -21,7 +21,7 @@ const SolutionCard = ({ index, title, text, img }: SolutionCardProp) => {
     >
       <Box
         maxW="444px"
-        py="36px"
+        py={{ base: 0, lg: "36px" }}
         display="flex"
         flexDir="column"
         justifyContent="space-between"
@@ -40,15 +40,16 @@ const SolutionCard = ({ index, title, text, img }: SolutionCardProp) => {
           <Text
             fontFamily={pangaia.style.fontFamily}
             fontWeight="200"
-            fontSize="48px"
-            lineHeight="67.2px"
+            fontSize={{ base: "32px", lg: "48px" }}
+            lineHeight={{ base: "44.8px", lg: "67.2px" }}
           >
             {title}
           </Text>
         </Box>
         <Text
+          m={{ base: "24px 0 64px", lg: 0 }}
           fontFamily={suisse.style.fontFamily}
-          fontSize="18px"
+          fontSize={{ base: "15px", lg: "18px" }}
           textColor="#0F0F0F66"
         >
           {text}

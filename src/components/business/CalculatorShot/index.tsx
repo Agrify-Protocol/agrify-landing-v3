@@ -8,19 +8,24 @@ import { useRouter } from "next/navigation";
 const CalculatorShot = () => {
   const router = useRouter();
   return (
-    <Box mt="218px" mb="160px" textAlign="center">
+    <Box
+      mt={{ base: "88px", lg: "218px" }}
+      mb={{ base: "88px", lg: "160px" }}
+      textAlign="center"
+    >
       <Box mb={10}>
         <Text
           fontFamily={pangaia.style.fontFamily}
           fontWeight="200"
-          fontSize="48px"
+          fontSize={{ base: "32px", lg: "48px" }}
+          lineHeight={{ base: "38.4px", lg: "57.6px" }}
           mb={4}
         >
           Calculate Your Carbon Emissions
         </Text>
         <Text
           fontFamily={suisse.style.fontFamily}
-          fontSize="18px"
+          fontSize={{ base: "15px", lg: "18px" }}
           textColor="#0F0F0F66"
           lineHeight="21.6px"
           maxW="612px"

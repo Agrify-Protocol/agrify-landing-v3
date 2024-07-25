@@ -12,6 +12,7 @@ import Image from "next/image";
 const Waitlist = () => {
   const {
     isInputInvalid,
+    userDetails,
     setIsInputInvalid,
     handleInputOnchange,
     setOpenCountryModal,
@@ -46,6 +47,7 @@ const Waitlist = () => {
       </Text>
       <Stack my={{ base: 6, lg: 10 }} spacing={4}>
         <CustomInput
+          value={userDetails.full_name}
           label="Full Name"
           id="full_name"
           placeholder="Enter Name"
@@ -58,6 +60,7 @@ const Waitlist = () => {
           isLoading={isLoading}
         />
         <CustomInput
+          value={userDetails.email}
           label="Email Address"
           id="email"
           type="email"
@@ -69,6 +72,7 @@ const Waitlist = () => {
           isLoading={isLoading}
         />
         <CustomInput
+          value={userDetails.phone_number}
           label="Phone Number"
           id="phone_number"
           type="tel"
@@ -133,6 +137,7 @@ const Waitlist = () => {
           label="Farm size (In Hectares)"
           id="farm_size"
           placeholder="Enter Farm size"
+          value={userDetails.farm_size}
           isInvalid={isInputInvalid.farm_size}
           errorMessage="Farm size must contain numbers only."
           onChange={(e) => handleInputOnchange(e)}

@@ -8,38 +8,104 @@ import Email from "../view/sections/Email";
 import FactorWrapper from "../view/sections/Factors";
 import countryList from "../../../../const/countryList.json";
 import Footprint from "../view/sections/Footprint";
-import transportation from "../../../../../public/icons/calculator/transportation.svg";
+import distance from "../../../../../public/icons/calculator/transportation.svg";
 import waste from "../../../../../public/icons/calculator/waste.svg";
-import food from "../../../../../public/icons/calculator/food.svg";
+import meal from "../../../../../public/icons/calculator/food.svg";
 import electricity from "../../../../../public/icons/calculator/electricity.svg";
+import axios from "axios";
+import { useToast } from "@chakra-ui/react";
 
 const useCarbonCalculatorLogic = () => {
   const [step, setStep] = useState(0);
-  const [details, setDetails] = useState({
+  const toast = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState(null);
+  const initialDetails = {
     email: "",
     country: countryList[0],
-    transportation: "",
+    distance: "",
     waste: "",
     electricity: "",
-    food: "",
-  });
+    meal: "",
+  };
+  const [details, setDetails] = useState(initialDetails);
   const [isInputInvalid, setIsInputInvalid] = useState({
     email: false,
-    transportation: false,
+    distance: false,
     waste: false,
     electricity: false,
-    food: false,
+    meal: false,
   });
-  const btn = [
-    {
-      title: "Back",
-      action: () => setStep((prev) => prev - 1),
-    },
-    {
-      title: "Next",
-      action: () => setStep((prev) => prev + 1),
-    },
-  ];
+
+  const calculateCarbon = () => {
+    setIsLoading(true);
+
+    const detailsCopy = { ...details };
+    // @ts-ignore
+    delete detailsCopy.email;
+
+    if (process.env.NEXT_PUBLIC_CALCULATE_CARBON_EMISSION) {
+      axios
+        .post(process.env.NEXT_PUBLIC_CALCULATE_CARBON_EMISSION, {
+          ...detailsCopy,
+          country: detailsCopy.country.name.common,
+        })
+        .then((response) => {
+          if (response?.status <= 400) {
+            setResult(response?.data);
+            toast({
+              title: "Success!",
+              position: "top-right",
+              description:
+                response?.data?.message ??
+                "Carbon footsprint calculated successfully!",
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+            setDetails(initialDetails);
+            setStep((prev) => prev + 1);
+          } else {
+            toast({
+              title: "Error!",
+              position: "top-right",
+              description: response?.data?.message ?? "Something went wrong.",
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+          }
+        })
+        .catch((error) => {
+          toast({
+            title: "Error!",
+            position: "top-right",
+            description:
+              error?.response?.data?.error ?? "Something went wrong.",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  };
+
+  const btn = (step: number) => {
+    return [
+      {
+        title: "Back",
+        action: () => setStep((prev) => prev - 1),
+      },
+      {
+        title: "Next",
+        action: () =>
+          step !== 5 ? setStep((prev) => prev + 1) : calculateCarbon(),
+      },
+    ];
+  };
 
   const onChange = (e: { target: { name: string; value: string } }) => {
     setDetails((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -49,7 +115,7 @@ const useCarbonCalculatorLogic = () => {
         email: validateEmail(e.target.value),
       }));
     } else if (
-      ["transportation", "waste", "electricity", "food"].includes(e.target.name)
+      ["distance", "waste", "electricity", "meal"].includes(e.target.name)
     ) {
       setIsInputInvalid((prev) => ({
         ...prev,
@@ -71,7 +137,7 @@ const useCarbonCalculatorLogic = () => {
               />
             </Carousel>
           ),
-          btn: btn.filter((_item, index) => index != 0),
+          btn: btn(step).filter((_item, index) => index != 0),
           isDisabled: details.email === "" || isInputInvalid.email,
         };
       case 1:
@@ -81,7 +147,7 @@ const useCarbonCalculatorLogic = () => {
               <Country details={details} setDetails={setDetails} />
             </Carousel>
           ),
-          btn: btn,
+          btn: btn(step),
           isDisabled: false,
         };
       case 2:
@@ -89,21 +155,20 @@ const useCarbonCalculatorLogic = () => {
           body: (
             <FactorWrapper
               details={details}
-              icon={transportation}
-              alt="transportation icon"
+              icon={distance}
+              alt="distance icon"
               title="Transportation"
               step={step}
-              name="transportation"
+              name="distance"
               question="What is your daily commute distance in km?"
               options={["km/day", "km/week", "km/month"]}
-              isInvalid={isInputInvalid.transportation}
+              isInvalid={isInputInvalid.distance}
               onChange={onChange}
               setIsInputInvalid={setIsInputInvalid}
             />
           ),
-          btn: btn,
-          isDisabled:
-            details?.transportation === "" || isInputInvalid.transportation,
+          btn: btn(step),
+          isDisabled: details?.distance === "" || isInputInvalid.distance,
         };
       case 3:
         return {
@@ -115,14 +180,14 @@ const useCarbonCalculatorLogic = () => {
               title="Waste"
               name="waste"
               step={step}
-              question="What is your generated waste in kg?"
+              question="What is your weekly generated waste in kg?"
               options={["kg/day", "kg/week", "kg/month"]}
               isInvalid={isInputInvalid.waste}
               onChange={onChange}
               setIsInputInvalid={setIsInputInvalid}
             />
           ),
-          btn: btn,
+          btn: btn(step),
           isDisabled: details?.waste === "" || isInputInvalid.waste,
         };
       case 4:
@@ -135,14 +200,14 @@ const useCarbonCalculatorLogic = () => {
               title="Electricity"
               name="electricity"
               step={step}
-              question="What is your electricity consumption in kwh?"
+              question="What is your monthly electricity consumption in kwh?"
               options={["kwh/day", "kwh/week", "kwh/month"]}
               isInvalid={isInputInvalid.electricity}
               onChange={onChange}
               setIsInputInvalid={setIsInputInvalid}
             />
           ),
-          btn: btn,
+          btn: btn(step),
           isDisabled: details?.electricity === "" || isInputInvalid.electricity,
         };
       case 5:
@@ -150,25 +215,25 @@ const useCarbonCalculatorLogic = () => {
           body: (
             <FactorWrapper
               details={details}
-              icon={food}
-              alt="food icon"
-              name="food"
+              icon={meal}
+              alt="meal icon"
+              name="meal"
               title="Meal"
               step={step}
               question="What is your daily number of meals?"
-              isInvalid={isInputInvalid.food}
+              isInvalid={isInputInvalid.meal}
               onChange={onChange}
               setIsInputInvalid={setIsInputInvalid}
             />
           ),
-          btn: btn,
-          isDisabled: details?.food === "" || isInputInvalid.food,
+          btn: btn(step),
+          isDisabled: details?.meal === "" || isInputInvalid.meal,
         };
       case 6:
         return {
           body: (
             <Carousel step={step}>
-              <Footprint />
+              <Footprint email={details.email} result={result} />
             </Carousel>
           ),
           btn: btn,
@@ -178,7 +243,7 @@ const useCarbonCalculatorLogic = () => {
         return { body: null, btn: btn, isDisabled: false };
     }
   };
-  return { step, currentBody };
+  return { step, currentBody, details, isLoading, result };
 };
 
 export default useCarbonCalculatorLogic;

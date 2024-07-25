@@ -6,8 +6,15 @@ import electricity from "../../../../../../public/icons/calculator/celectricity.
 import food from "../../../../../../public/icons/calculator/cfood.svg";
 import Image from "next/image";
 import CustomButton from "@/components/common/CustomButton";
+import { useRouter } from "next/navigation";
 
-const Footprint = () => {
+interface FootprintProps {
+  email: string;
+  result: any
+}
+
+const Footprint = ({ email, result }: FootprintProps) => {
+  console.log('result', result)
   const cards = [
     {
       icon: transporation,
@@ -30,6 +37,8 @@ const Footprint = () => {
       value: "200 tonnes C02/year",
     },
   ];
+
+  const router = useRouter();
   return (
     <Box fontFamily={suisse.style.fontFamily}>
       <Box textAlign="center">
@@ -66,7 +75,7 @@ const Footprint = () => {
         <CustomButton
           text="Take action"
           variant="solid"
-          onClick={() => null}
+          onClick={() => router.push(`/invest-in-nature?email=${email}`)}
           isLoading={false}
           isDisabled={false}
         />

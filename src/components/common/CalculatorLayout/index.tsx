@@ -4,13 +4,15 @@ import React from "react";
 import { pangaia, suisse } from "@/fonts";
 import Card from "./Card";
 import Link from "next/link";
+import { validateEmail } from "@/utils/validationSchema";
 
 export interface CalculatorLayoutProp {
   step?: number;
+  email: string;
   children: React.ReactNode;
 }
 
-const CalculatorLayout = ({ step, children }: CalculatorLayoutProp) => {
+const CalculatorLayout = ({ step, email, children }: CalculatorLayoutProp) => {
   return (
     <Box background="brand.grey" minH="100vh">
       <CalculatorNavbar />
@@ -36,7 +38,7 @@ const CalculatorLayout = ({ step, children }: CalculatorLayoutProp) => {
         >
           Calculate Your Carbon Footprint
         </Text>
-        <Card>{children}</Card>
+        <Card email={email} >{children}</Card>
         {step !== 6 ? (
           <Box
             fontFamily={suisse.style.fontFamily}
@@ -44,7 +46,11 @@ const CalculatorLayout = ({ step, children }: CalculatorLayoutProp) => {
             textAlign="center"
             textColor="brand.darkGrey"
           >
-            <Link href={"/invest-in-nature"}>
+            <Link
+              href={`/invest-in-nature${
+                validateEmail(email ?? '') ? "" : `?email=${email}`
+              }`}
+            >
               Skip calculator and start Investing
             </Link>
           </Box>

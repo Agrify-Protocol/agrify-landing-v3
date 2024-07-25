@@ -9,11 +9,13 @@ import { suisse } from "@/fonts";
 import CustomInput from "@/components/common/CustomInput";
 import CustomButton from "@/components/common/CustomButton";
 import useInvestInNatureFormLogic from "@/utils/hooks/useInvestInNatureFormLogic";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const NatureForm = () => {
-  const { fields, handleFormOnChange, finalObj } = useInvestInNatureFormLogic()
   const router = useRouter();
+  const params = useSearchParams();
+  const { fields, handleFormOnChange, finalObj, isInvalid } =
+    useInvestInNatureFormLogic(params.get("email"));
 
   return (
     <Box
@@ -22,10 +24,10 @@ const NatureForm = () => {
       backgroundColor="brand.grey"
     >
       <Box
-        w={{ base: "100%", lg: "50%" }}
+        w={{ base: "100%", md: "70%", lg: "50%" }}
         py="40px"
-        px="64px"
-        mr="34px"
+        px={{ base: "16px", lg: "64px" }}
+        mr={{ base: 0, lg: "34px" }}
         mx={{ base: "auto", lg: "0" }}
       >
         <Link
@@ -36,13 +38,20 @@ const NatureForm = () => {
         </Link>
         <Box mt="52px" mb="48px">
           <Box>
-            <Text fontWeight="500" fontSize="32px" mb="12px">
+            <Text
+              fontWeight="500"
+              fontSize={{ base: "24px", lg: "32px" }}
+              mb="12px"
+            >
               Invest in{" "}
               <Text as="span" textColor="brand.darkGrey">
                 Nature
               </Text>
             </Text>
-            <Text textColor="brand.darkGrey">
+            <Text
+              textColor="brand.darkGrey"
+              fontSize={{ base: "15px", lg: "16px" }}
+            >
               Please tell us a little bit more about your organization.
             </Text>
           </Box>
@@ -58,6 +67,7 @@ const NatureForm = () => {
                 isInvalid={item.isInValid}
                 errorMessage={item.errorMessage}
                 options={item.options}
+                value={item.value ?? ""}
                 onChange={(e) => handleFormOnChange(e, index, item.id)}
               />
             ))}
@@ -66,8 +76,11 @@ const NatureForm = () => {
             text="Submit"
             variant="solid"
             isLoading={false}
-            onClick={() => router.push('/investment-confirmed')}
-            isDisabled={Object.values(finalObj).some((value) => value === "")}
+            onClick={() => router.push("/investment-confirmed")}
+            isDisabled={
+              Object.values(finalObj).some((value) => value === "") ||
+              Object.values(isInvalid).some((value) => value === true)
+            }
             width="100%"
             mt="48px"
             fontWeight="500"

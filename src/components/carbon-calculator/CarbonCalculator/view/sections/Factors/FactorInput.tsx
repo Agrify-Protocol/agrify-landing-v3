@@ -1,6 +1,6 @@
 import getBorderColor from "@/utils/getBorderColor";
 import { Box, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "../../../../../common/CustomInput/input.css";
 import "../../index.css";
 
@@ -13,10 +13,10 @@ interface FactorInputProp {
   details: {
     email: string;
     country: any;
-    transportation: string;
+    distance: string;
     waste: string;
     electricity: string;
-    food: string;
+    meal: string;
   };
 }
 
@@ -29,6 +29,7 @@ const FactorInput = ({
   details,
 }: FactorInputProp) => {
   const [telInputActive, setTelInputActive] = useState(false);
+  const inputElement = useRef<HTMLInputElement>(null);
   return (
     <>
       <Box
@@ -44,14 +45,19 @@ const FactorInput = ({
           border: isInvalid ? "1px solid #dc143c" : "1px solid #C8C8C8",
         }}
         padding={2}
+        onClick={() => {
+          inputElement.current?.focus();
+        }}
       >
         <input
           style={{
+            margin: "8px 6px",
             backgroundColor: "transparent",
             width: "100%",
             outline: "none",
             marginLeft: "17px",
           }}
+          ref={inputElement}
           name={name}
           id={name}
           value={details[name as keyof typeof details]}
@@ -64,7 +70,7 @@ const FactorInput = ({
           }}
           onChange={onChange}
         />
-        {options !== undefined ? (
+        {/* {options !== undefined ? (
           <select
             style={{
               color: "#A6A6A6",
@@ -78,7 +84,7 @@ const FactorInput = ({
               <option key={item}>{item}</option>
             ))}
           </select>
-        ) : null}
+        ) : null} */}
       </Box>
       {isInvalid ? (
         <Text fontSize="12px" color="#dc143c">

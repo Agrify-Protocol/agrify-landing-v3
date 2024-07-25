@@ -1,8 +1,8 @@
 "use client";
 
-import CustomerLoader from "@/components/common/CustomLoader";
 import { Box, BoxProps } from "@chakra-ui/react";
 import Arrow from "../../../../../../public/icons/Arrow";
+import SpiralLoader from "@/components/common/CustomLoader/SpiralLoader";
 
 interface CalculatorBtnProp extends BoxProps {
   text: string;
@@ -42,11 +42,19 @@ const CalculatorBtn = ({
       onClick={isDisabled || isLoading ? (e) => e.preventDefault() : onClick}
       {...rest}
     >
-      {isLoading ? <CustomerLoader /> : text}
-      <Arrow
-        color={isDisabled ? "#EEEEEE" : text === "Back" ? "#A6A6A6" : "#0CC14C"}
-        style={{ rotate: text === "Back" ? "180deg" : "" }}
-      />
+      {isLoading ? (
+        <SpiralLoader />
+      ) : (
+        <>
+          {text}
+          <Arrow
+            color={
+              isDisabled ? "#EEEEEE" : text === "Back" ? "#A6A6A6" : "#0CC14C"
+            }
+            style={{ rotate: text === "Back" ? "180deg" : "" }}
+          />
+        </>
+      )}
     </Box>
   );
 };

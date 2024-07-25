@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { validateEmail, validateNameInput } from "../validationSchema";
 
-const useInvestInNatureFormLogic = () => {
+const useInvestInNatureFormLogic = (defaultEmail: string | null) => {
+  const isEmailValid = useMemo(() => {
+    return defaultEmail !== null && validateEmail(defaultEmail);
+  }, [defaultEmail]);
+
   const [fields, setFields] = useState([
     {
       title: "Email Address",
       placeholder: "Enter Email Address",
       id: "email",
       type: "email",
-      value: "",
-      isInValid: false,
+      value: defaultEmail,
+      isInValid: isEmailValid,
       errorMessage: "Email address must be valid.",
     },
     {
@@ -65,6 +69,11 @@ const useInvestInNatureFormLogic = () => {
     },
   ]);
 
+  const isInvalid = fields.reduce(
+    (acc, item) => ({ ...acc, [item.id]: item.isInValid }),
+    {}
+  );
+
   const finalObj = fields.reduce(
     (acc, item) => ({ ...acc, [item.id]: item.value }),
     {}
@@ -99,7 +108,7 @@ const useInvestInNatureFormLogic = () => {
     });
   };
 
-  return { fields, handleFormOnChange, finalObj };
+  return { fields, handleFormOnChange, finalObj, isInvalid };
 };
 
 export default useInvestInNatureFormLogic;

@@ -6,6 +6,7 @@ import Hero from "@/components/sections/Hero";
 import handleScroll from "@/utils/handleScroll";
 import { sendGAEvent } from "@next/third-parties/google";
 import agrifyHero from "../../../public/images/business-hero.png";
+import agrifyHeroMobile from "../../../public/images/mobile-biz-hero.png";
 import Collaboration from "@/components/sections/Collaboration";
 import SolutionCard from "@/components/business/SolutionCard";
 import { Box } from "@chakra-ui/react";
@@ -29,7 +30,7 @@ const Business = () => {
     >
       <Hero
         title="Offset your emissions and decarbonize your supply chain with Regenerative agriculture."
-        bgGradient='linear(#F8F5F4, white)'
+        bgGradient="linear(#F8F5F4, white)"
         btn={
           <CustomButton
             text="Learn More"
@@ -43,14 +44,22 @@ const Business = () => {
         }
         img={{
           desktop: agrifyHero,
-          mobile: agrifyHero,
+          mobile: agrifyHeroMobile,
           alt: "agrify business hero image",
         }}
       />
-      <Box px={9}>
+      <Box px={{ base: 0, lg: 9 }}>
         <Collaboration />
       </Box>
-      <Box display="flex" flexDir="column" gap="83px" pt="144px" px={14} id="solutions">
+      <Box
+        display="flex"
+        flexDir="column"
+        alignItems={{ md: "center", lg: "initial" }}
+        gap={{ base: "40px", lg: "83px" }}
+        pt={{ base: "80px", lg: "144px" }}
+        px={{ base: 0, lg: 14 }}
+        id="solutions"
+      >
         {solutions.map((item, index) => (
           <SolutionCard
             key={item.title}
