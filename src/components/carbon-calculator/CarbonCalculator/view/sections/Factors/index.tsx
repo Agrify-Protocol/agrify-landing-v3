@@ -19,10 +19,10 @@ interface FactorWrapperProp {
   details: {
     email: string;
     country: any;
-    transportation: string;
+    distance: string;
     waste: string;
     electricity: string;
-    food: string;
+    meal: string;
   };
 }
 

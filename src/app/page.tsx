@@ -1,35 +1,61 @@
-import { Box } from "@chakra-ui/react";
-import Navbar from "@/components/common/Navbar";
+"use client";
+
 import Hero from "@/components/sections/Hero";
 import Collaboration from "@/components/sections/Collaboration";
 import ClimateChange from "@/components/sections/ClimateChange";
 import Product from "@/components/sections/Product";
 import HowItWorks from "@/components/sections/HowItWorks";
 import Partners from "@/components/sections/Partners";
-import Faq from "@/components/sections/Faq";
-import Connect from "@/components/sections/Connect";
-import dynamic from "next/dynamic";
+import Shell from "@/components/common/Shell";
+import handleScroll from "@/utils/handleScroll";
+import CustomButton from "@/components/common/CustomButton";
+import { sendGAEvent } from "@next/third-parties/google";
+import agrifyHero from "../../public/images/agrify.png";
+import agrifyHeroMobile from "../../public/images/agrify-mobile.png";
+import useHomeLogic from "@/utils/hooks/useHomeLogic";
 
 const Home = () => {
-  const NoSSRWaitlist = dynamic(
-    () => import("@/components/sections/Waitlist"),
-    { ssr: false }
-  );
+  const { NoSSRWaitlist, menu } = useHomeLogic();
+
   return (
-    <Box backgroundColor="brand.grey" maxW="1800px" mx="auto">
-      <Navbar />
-      <Box px={{ base: 3, lg: 4 }} pb={1}>
-        <Hero />
-        <Collaboration />
-        <ClimateChange />
-        <Product />
-        <HowItWorks />
-        <NoSSRWaitlist />
-        <Partners />
-        <Faq />
-        <Connect />
-      </Box>
-    </Box>
+    <Shell
+      menu={menu}
+      btn={
+        <CustomButton
+          text="Join the Waitlist"
+          onClick={() => handleScroll("join-waitlist")}
+        />
+      }
+      backgroundColor="brand.grey"
+    >
+      <Hero
+        title="Helping Farmers improve yield, earn carbon income and qualify for
+          international exports"
+        backgroundColor="white"
+        btn={
+          <CustomButton
+            text="Learn More"
+            variant="solid"
+            onClick={() => {
+              handleScroll("climate-change");
+              sendGAEvent("event", "farmers-learn-more", { value: "view" });
+            }}
+            padding={{ base: "12px 24px 12px 24px" }}
+          />
+        }
+        img={{
+          desktop: agrifyHero,
+          mobile: agrifyHeroMobile,
+          alt: "agrify farmers hero image",
+        }}
+      />
+      <Collaboration />
+      <ClimateChange />
+      <Product />
+      <HowItWorks />
+      <NoSSRWaitlist />
+      <Partners />
+    </Shell>
   );
 };
 

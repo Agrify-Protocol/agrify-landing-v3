@@ -1,20 +1,27 @@
 "use client";
 
-import CustomButton from "@/components/common/CustomButton";
 import { pangaia } from "@/fonts";
 import { Box, Text } from "@chakra-ui/react";
-import Image from "next/image";
-import agrifyHero from "../../../../public/images/agrify.png";
-import agrifyHeroMobile from "../../../../public/images/agrify-mobile.png";
-import handleScroll from "@/utils/handleScroll";
-import { sendGAEvent } from "@next/third-parties/google";
+import Image, { StaticImageData } from "next/image";
+import React from "react";
 
-const Hero = () => {
+interface HeroProp {
+  title: string;
+  btn: React.ReactNode;
+  img: {
+    desktop: StaticImageData;
+    mobile: StaticImageData;
+    alt: string;
+  };
+  [others: string]: any;
+}
+
+const Hero = ({ title, btn, img, ...others }: HeroProp) => {
   return (
     <Box
-      backgroundColor="white"
       rounded={{ base: "16px", lg: "24px" }}
       pt={{ base: 16, lg: 36 }}
+      {...others}
     >
       <Box
         maxW="954px"
@@ -31,30 +38,21 @@ const Hero = () => {
           mb={6}
           as="h2"
         >
-          Helping Farmers improve yield, earn carbon income and qualify for
-          international exports
+          {title}
         </Text>
-        <CustomButton
-          text="Learn More"
-          variant="solid"
-          onClick={() => {
-            handleScroll("climate-change");
-            sendGAEvent("event", "learn-more", { value: "view" });
-          }}
-          padding={{ base: "12px 24px 12px 24px" }}
-        />
+        {btn}
       </Box>
       <Box display={{ base: "none", md: "block" }}>
         <Image
-          src={agrifyHero}
-          alt="agrify hero image"
+          src={img.desktop}
+          alt={img.alt}
           style={{ borderRadius: "24px" }}
         />
       </Box>
       <Box display={{ base: "block", md: "none" }}>
         <Image
-          src={agrifyHeroMobile}
-          alt="agrify hero image"
+          src={img.mobile}
+          alt={img.alt}
           style={{ borderRadius: "16px" }}
         />
       </Box>

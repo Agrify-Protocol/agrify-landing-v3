@@ -11,12 +11,14 @@ interface CustomInputProp {
   placeholder: string;
   type?: string;
   isInvalid?: boolean;
-  errorMessage?: string;
+  errorMessage?: string
+  value: any;
   onChange: (e?: any) => void;
   setOpenCountryModal?: React.Dispatch<React.SetStateAction<boolean>>;
   selectedCountry?: any;
   setIsInputInvalid?: React.Dispatch<React.SetStateAction<any>>;
   isLoading: boolean;
+  options?: string[];
 }
 
 const CustomInput = ({
@@ -31,6 +33,8 @@ const CustomInput = ({
   selectedCountry,
   setIsInputInvalid,
   isLoading,
+  options,
+  value,
 }: CustomInputProp) => {
   const [telInputActive, setTelInputActive] = useState(false);
 
@@ -45,34 +49,7 @@ const CustomInput = ({
       <Text as="label" htmlFor={id}>
         {label}
       </Text>
-      {type !== "tel" ? (
-        <Box>
-          <input
-            className={`custom-text-input ${
-              isInvalid ? "error-text-input-border" : "text-input-border"
-            }`}
-            style={{
-              transition: "all 0.1s ease-in-out",
-              width: "100%",
-            }}
-            id={id}
-            name={id}
-            placeholder={placeholder}
-            type={type}
-            onChange={onChange}
-            onBlur={() =>
-              setIsInputInvalid &&
-              setIsInputInvalid((prev: any) => ({ ...prev, [id]: false }))
-            }
-            readOnly={isLoading}
-          />
-          {isInvalid ? (
-            <Text fontSize="12px" color="#dc143c">
-              {errorMessage}
-            </Text>
-          ) : null}
-        </Box>
-      ) : (
+      {type === "tel" ? (
         <>
           <Box
             bgColor="white"
@@ -112,6 +89,7 @@ const CustomInput = ({
             <input
               id={id}
               name={id}
+              value={value}
               placeholder={placeholder}
               style={{
                 marginLeft: "8px",
@@ -140,7 +118,97 @@ const CustomInput = ({
             </Text>
           ) : null}
         </>
-      )}
+      ) : null}
+      {["text", "email"].includes(type) ? (
+        <Box>
+          <input
+            className={`custom-text-input ${
+              isInvalid ? "error-text-input-border" : "text-input-border"
+            }`}
+            style={{
+              transition: "all 0.1s ease-in-out",
+              width: "100%",
+            }}
+            id={id}
+            name={id}
+            placeholder={placeholder}
+            type={type}
+            value={value}
+            onChange={onChange}
+            onBlur={() =>
+              setIsInputInvalid &&
+              setIsInputInvalid((prev: any) => ({ ...prev, [id]: false }))
+            }
+            readOnly={isLoading}
+          />
+          {isInvalid ? (
+            <Text fontSize="12px" color="#dc143c">
+              {errorMessage}
+            </Text>
+          ) : null}
+        </Box>
+      ) : null}
+      {type === "select" ? (
+        <Box>
+          <select
+            className={`custom-text-input ${
+              isInvalid ? "error-text-input-border" : "text-input-border"
+            }`}
+            style={{
+              transition: "all 0.1s ease-in-out",
+              width: "100%",
+            }}
+            id={id}
+            name={id}
+            disabled={isLoading}
+            onChange={onChange}
+            value={value}
+            onBlur={() =>
+              setIsInputInvalid &&
+              setIsInputInvalid((prev: any) => ({ ...prev, [id]: false }))
+            }
+          >
+            {options?.map((item) => (
+              <option key={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+          {isInvalid ? (
+            <Text fontSize="12px" color="#dc143c">
+              {errorMessage}
+            </Text>
+          ) : null}
+        </Box>
+      ) : null}
+      {type === "text-area" ? (
+        <Box>
+          <textarea
+            className={`custom-text-input ${
+              isInvalid ? "error-text-input-border" : "text-input-border"
+            }`}
+            style={{
+              transition: "all 0.1s ease-in-out",
+              width: "100%",
+            }}
+            id={id}
+            name={id}
+            value={value}
+            placeholder={placeholder}
+            onChange={onChange}
+            onBlur={() =>
+              setIsInputInvalid &&
+              setIsInputInvalid((prev: any) => ({ ...prev, [id]: false }))
+            }
+            readOnly={isLoading}
+          />
+          {isInvalid ? (
+            <Text fontSize="12px" color="#dc143c">
+              {errorMessage}
+            </Text>
+          ) : null}
+        </Box>
+      ) : null}
     </InputGroup>
   );
 };

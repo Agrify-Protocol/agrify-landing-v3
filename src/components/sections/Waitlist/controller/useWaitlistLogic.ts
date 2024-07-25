@@ -12,7 +12,7 @@ import {
   validateNameInput,
   validatePhoneNumber,
 } from "@/utils/validationSchema";
-import { sendGAEvent } from '@next/third-parties/google'
+import { sendGAEvent } from "@next/third-parties/google";
 
 interface UserDetailsProp {
   full_name: string;
@@ -88,9 +88,9 @@ const useWaitlistLogic = () => {
       phone_number: `${getCountryCodeValue(selectedCountry?.idd)}${userNumber}`,
       farm_country: selectedFarmLocation.name.common,
     };
-    if (process.env.NEXT_PUBLIC_JOIN_WAITLIST) {
+    if (process.env.NEXT_PUBLIC_BASE_URL) {
       axios
-        .post(process.env.NEXT_PUBLIC_JOIN_WAITLIST, newUserDetails)
+        .post(`${process.env.NEXT_PUBLIC_BASE_URL}/waitlist/join`, newUserDetails)
         .then((response) => {
           if (response?.status <= 400) {
             toast({
