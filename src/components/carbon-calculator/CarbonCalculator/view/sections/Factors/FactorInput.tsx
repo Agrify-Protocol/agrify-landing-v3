@@ -64,6 +64,7 @@ const FactorInput = ({
           onFocus={() => {
             setTelInputActive(true);
           }}
+          autoFocus
           onBlur={() => {
             setTelInputActive(false);
             setIsInputInvalid((prev: any) => ({ ...prev, [name]: false }));

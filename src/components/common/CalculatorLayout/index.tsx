@@ -22,23 +22,23 @@ const CalculatorLayout = ({ step, email, children }: CalculatorLayoutProp) => {
         bgRepeat="repeat"
         minHeight="85vh"
         bgPosition="center"
-        m="8px 24px 0px 24px"
+        m={{ base: "16px 10px 0px 10px", lg: "8px 24px 0px 24px" }}
         rounded="24px"
         pb={10}
       >
         <Text
           fontFamily={pangaia.style.fontFamily}
           fontWeight="200"
-          fontSize="48px"
+          fontSize={{ base: "24px", lg: "48px" }}
           lineHeight="57.6px"
           letterSpacing="0.2%"
           textAlign="center"
-          pt="80px"
+          pt={{ base: "66px", lg: "80px" }}
           pb="40px"
         >
           Calculate Your Carbon Footprint
         </Text>
-        <Card email={email} >{children}</Card>
+        <Card email={email}>{children}</Card>
         {step !== 6 ? (
           <Box
             fontFamily={suisse.style.fontFamily}
@@ -48,7 +48,7 @@ const CalculatorLayout = ({ step, email, children }: CalculatorLayoutProp) => {
           >
             <Link
               href={`/invest-in-nature${
-                validateEmail(email ?? '') ? "" : `?email=${email}`
+                validateEmail(email ?? "") ? "" : `?email=${email}`
               }`}
             >
               Skip calculator and start Investing
