@@ -3,11 +3,13 @@
 import { Box, BoxProps } from "@chakra-ui/react";
 import Arrow from "../../../../../../public/icons/Arrow";
 import SpiralLoader from "@/components/common/CustomLoader/SpiralLoader";
+import { FormEvent } from "react";
 
 interface CalculatorBtnProp extends BoxProps {
   text: string;
   isLoading?: boolean;
   isDisabled?: boolean;
+  type: string;
   onClick: (e?: any) => void;
 }
 
@@ -16,12 +18,21 @@ const CalculatorBtn = ({
   onClick,
   isLoading,
   isDisabled,
+  type,
   ...rest
 }: CalculatorBtnProp) => {
+
+  const handleSubmit = (e: FormEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    !(isDisabled || isLoading) ? onClick() : null;
+  };
+
   return (
     <Box
       as="button"
+      type={type}
       name={text}
+      onSubmit={(e) => handleSubmit(e)}
       rounded="32px"
       cursor={isDisabled || isLoading ? "not-allowed" : "pointer"}
       bgColor={isDisabled || text === "Back" ? "#EEEEEE" : "brand.green"}
@@ -39,7 +50,7 @@ const CalculatorBtn = ({
           ? { bgColor: "#d9d9d9" }
           : { bgColor: "#0A9B3C" }
       }
-      onClick={isDisabled || isLoading ? (e) => e.preventDefault() : onClick}
+      onClick={(e) => handleSubmit(e)}
       {...rest}
     >
       {isLoading ? (

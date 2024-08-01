@@ -14,23 +14,35 @@ interface FootprintProps {
 }
 
 const Footprint = ({ email, result }: FootprintProps) => {
-  const { emission } = result;
+  
+  const {
+    transportation_emissions,
+    waste_emissions,
+    electricity_emissions,
+    diet_emissions,
+    total_emissions,
+  } = result;
+
   const cards = [
     {
       icon: transporation,
       title: "Transportation",
+      value: transportation_emissions,
     },
     {
       icon: waste,
       title: "Waste",
+      value: waste_emissions,
     },
     {
       icon: electricity,
       title: "Electricity",
+      value: electricity_emissions,
     },
     {
       icon: food,
       title: "Meals",
+      value: diet_emissions,
     },
   ];
 
@@ -46,7 +58,7 @@ const Footprint = ({ email, result }: FootprintProps) => {
           fontWeight="500"
           letterSpacing="-2%"
         >
-          {Number(emission).toLocaleString()} tonnes C02/year
+          {Number(total_emissions).toLocaleString()} tonnes C02/year
         </Text>
       </Box>
       <Box my={10} display="flex" flexDir="column" gap={{ base: "6px", lg: 2 }}>
@@ -72,7 +84,7 @@ const Footprint = ({ email, result }: FootprintProps) => {
               </Text>
             </Box>
             <Text fontSize={{ base: "13.69px", lg: "16px" }}>
-              {Number(emission).toLocaleString()} tonnes C02/year
+              {Number(item.value).toLocaleString()} tonnes C02/year
             </Text>
           </Box>
         ))}

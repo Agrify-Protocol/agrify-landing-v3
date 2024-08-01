@@ -18,16 +18,16 @@ const Arrow = ({ color, ...rest }: ArrowProp) => {
         <path
           d="M6.83594 12H16.1693"
           stroke={color}
-          stroke-width="1.33333"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.33333"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M11.5 7.33301L16.1667 11.9997L11.5 16.6663"
           stroke={color}
-          stroke-width="1.33333"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.33333"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </Box>

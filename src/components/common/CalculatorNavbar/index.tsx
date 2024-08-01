@@ -35,7 +35,7 @@ const CalculatorNavbar = () => {
         zIndex={10}
       >
         <Link
-          href="/"
+          href="/business"
           style={{ outline: "none", display: "block", width: "fit-content" }}
         >
           <Image src={logo} alt="agrify logo icon" />
