@@ -8,36 +8,39 @@ import { suisse } from "@/fonts";
 import "../../../components/sections/animation.css";
 
 const CalculatorNavbar = () => {
-  const menu = [
-    {
-      title: "Log In",
-      path: "#",
-    },
-    {
-      title: "Sign Up",
-      path: "#",
-    },
-  ];
+  // const menu = [
+  //   {
+  //     title: "Log In",
+  //     path: "#",
+  //   },
+  //   {
+  //     title: "Sign Up",
+  //     path: "#",
+  //   },
+  // ];
 
   return (
     <>
       <Box
-        px={16}
+        px={{ base: 4, lg: 16 }}
         fontFamily={suisse.style.fontFamily}
         display="flex"
         alignItems="center"
         justifyContent="space-between"
-        paddingTop={10}
+        paddingTop={{ base: 6, lg: 10 }}
         position="sticky"
         top={0}
         background="rgba(245, 245, 247, 0.1)"
         backdropFilter="blur(12px)"
         zIndex={10}
       >
-        <Link href="/" style={{ outline: "none", display: "block", width: "fit-content" }}>
+        <Link
+          href="/"
+          style={{ outline: "none", display: "block", width: "fit-content" }}
+        >
           <Image src={logo} alt="agrify logo icon" />
         </Link>
-        <Box>
+        {/* <Box>
           {menu.map((item, index) => (
             <Button
               key={item.title}
@@ -58,7 +61,7 @@ const CalculatorNavbar = () => {
               {item.title}
             </Button>
           ))}
-        </Box>
+        </Box> */}
       </Box>
     </>
   );

@@ -32,9 +32,9 @@ const CalculatorInput = ({
   value,
 }: CalculatorInputProp) => {
   return (
-    <Box display="flex" flexDir="column" gap="24px">
+    <Box display="flex" flexDir="column" gap={{ base: "49px", lg: "24px" }}>
       <Text
-        fontSize="18px"
+        fontSize={{ base: "16px", lg: "18px" }}
         lineHeight="23.4px"
         letterSpacing="-2%"
         textAlign="center"
