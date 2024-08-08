@@ -1,7 +1,7 @@
 "use client";
 
 import { validateEmail, validateFarmSize } from "@/utils/validationSchema";
-import { useState } from "react";
+import React, { useState } from "react";
 import Carousel from "../view/Carousel";
 import Country from "../view/sections/Country";
 import Email from "../view/sections/Email";
@@ -12,12 +12,13 @@ import distance from "../../../../../public/icons/calculator/transportation.svg"
 import waste from "../../../../../public/icons/calculator/waste.svg";
 import meal from "../../../../../public/icons/calculator/food.svg";
 import electricity from "../../../../../public/icons/calculator/electricity.svg";
-import axios from "axios";
 import { useToast } from "@chakra-ui/react";
+import useApiCall from "@/utils/hooks/useApiCall";
 
 const useCarbonCalculatorLogic = () => {
   const [step, setStep] = useState(0);
   const toast = useToast();
+  const { apiCall } = useApiCall();
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState({});
   const initialDetails = {
@@ -49,56 +50,28 @@ const useCarbonCalculatorLogic = () => {
         name: { common },
       },
     } = details;
-    if (process.env.NEXT_PUBLIC_BASE_URL) {
-      axios
-        .post(`${process.env.NEXT_PUBLIC_BASE_URL}/calculateCarbon`, {
-          distance: Number(distance),
-          waste: Number(waste),
-          electricity: Number(electricity),
-          meal: Number(meal),
-          common,
-        })
-        .then((response) => {
-          if (response?.status <= 400) {
-            setResult(response?.data);
-            toast({
-              title: "Success!",
-              position: "top-right",
-              description:
-                response?.data?.message ??
-                "Carbon footsprint calculated successfully!",
-              status: "success",
-              duration: 9000,
-              isClosable: true,
-            });
-            setDetails({ ...initialDetails, email: details.email });
-            setStep((prev) => prev + 1);
-          } else {
-            toast({
-              title: "Error!",
-              position: "top-right",
-              description: response?.data?.message ?? "Something went wrong.",
-              status: "error",
-              duration: 9000,
-              isClosable: true,
-            });
-          }
-        })
-        .catch((error) => {
-          toast({
-            title: "Error!",
-            position: "top-right",
-            description:
-              error?.response?.data?.error ?? "Something went wrong.",
-            status: "error",
-            duration: 9000,
-            isClosable: true,
-          });
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }
+
+    apiCall(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/calculateCarbon`,
+      {
+        distance: Number(distance),
+        waste: Number(waste),
+        electricity: Number(electricity),
+        meal: Number(meal),
+        common,
+      },
+      {
+        success: "Carbon footsprint calculated successfully.",
+        error: "Something went wrong. Try again.",
+      },
+      setIsLoading,
+      (response) => {
+        setResult(response?.data);
+        setDetails({ ...initialDetails, email: details.email });
+        setStep((prev) => prev + 1);
+      },
+      null
+    );
   };
 
   const btn = (step: number) => {

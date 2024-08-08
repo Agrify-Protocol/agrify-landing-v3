@@ -11,7 +11,7 @@ const CarbonCalculator = () => {
 
   return (
     <CalculatorLayout step={step} email={details.email}>
-      <form>
+      <form onSubmit={(e) => e.preventDefault()}>
         <AnimatePresence initial={false} custom={step}>
           {currentBody()?.body}
         </AnimatePresence>
@@ -28,7 +28,7 @@ const CarbonCalculator = () => {
               key={item.title}
               text={item.title}
               onClick={item.action}
-              type={item.title === "Next" ? "submit" : "button"}
+              type={item.title === "Next" && step === 5 ? "submit" : "button"}
               isLoading={item.title === "Next" && isLoading}
               isDisabled={
                 item.title === "Next" ? currentBody().isDisabled : false

@@ -11,14 +11,14 @@ interface CustomInputProp {
   placeholder: string;
   type?: string;
   isInvalid?: boolean;
-  errorMessage?: string
+  errorMessage?: string;
   value: any;
   onChange: (e?: any) => void;
   setOpenCountryModal?: React.Dispatch<React.SetStateAction<boolean>>;
   selectedCountry?: any;
   setIsInputInvalid?: React.Dispatch<React.SetStateAction<any>>;
   isLoading: boolean;
-  options?: string[];
+  options?: { title: string; key: string }[];
 }
 
 const CustomInput = ({
@@ -169,9 +169,7 @@ const CustomInput = ({
             }
           >
             {options?.map((item) => (
-              <option key={item}>
-                {item}
-              </option>
+              <option key={item.key} value={item.key}>{item.title}</option>
             ))}
           </select>
           {isInvalid ? (

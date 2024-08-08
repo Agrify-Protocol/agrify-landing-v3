@@ -1,5 +1,9 @@
 import { useMemo, useState } from "react";
-import { validateEmail, validateNameInput } from "../validationSchema";
+import {
+  validateEmail,
+  validateNameInput,
+  validateTextInput,
+} from "../validationSchema";
 
 const useInvestInNatureFormLogic = (defaultEmail: string | null) => {
   const isEmailValid = useMemo(() => {
@@ -20,7 +24,7 @@ const useInvestInNatureFormLogic = (defaultEmail: string | null) => {
       title: "First Name",
       placeholder: "Enter First Name",
       type: "text",
-      id: "first_name",
+      id: "firstName",
       value: "",
       errorMessage:
         "First name must be at least 4 characters long and may not contain numbers.",
@@ -29,7 +33,7 @@ const useInvestInNatureFormLogic = (defaultEmail: string | null) => {
     {
       title: "Last Name",
       placeholder: "Enter Last Name",
-      id: "last_name",
+      id: "lastName",
       type: "text",
       value: "",
       errorMessage:
@@ -38,7 +42,7 @@ const useInvestInNatureFormLogic = (defaultEmail: string | null) => {
     },
     {
       title: "Company Name",
-      id: "company_name",
+      id: "companyName",
       placeholder: "Enter Farm Name",
       type: "text",
       value: "",
@@ -46,22 +50,24 @@ const useInvestInNatureFormLogic = (defaultEmail: string | null) => {
     },
     {
       title: "Select Your Role",
-      id: "role_name",
+      id: "role",
       placeholder: "Select Your Role",
       type: "select",
-      value: "Nature Investor/Financier",
+      value: "financier",
       options: [
-        "Nature Investor/Financier",
-        "Corporate Insetting",
-        "Project Developer",
-        "Off-taker",
-        "I don't know yet , currently exploring",
+        { title: "Nature Investor/Financier", key: "financier" },
+        { title: "Corporate Insetting", key: "insetting" },
+        { title: "Project Developer", key: "developer" },
+        { title: "Off-taker", key: "off-taker" },
+        { title: "I don't know yet , currently exploring", key: "explorer" },
       ],
       isInValid: false,
     },
     {
       title: "How interested are you in working with Agrify?",
       id: "interest",
+      errorMessage:
+        "Interest must be at least 4 characters long.",
       placeholder: "Indicate Your Interest",
       type: "text-area",
       value: "",
@@ -81,9 +87,11 @@ const useInvestInNatureFormLogic = (defaultEmail: string | null) => {
 
   const validateInput = (id: string, value: string) => {
     switch (id) {
-      case "first_name":
-      case "last_name":
+      case "firstName":
+      case "lastName":
         return validateNameInput(value);
+      case "interest":
+        return validateTextInput(value);
       case "email":
         return validateEmail(value);
       default:

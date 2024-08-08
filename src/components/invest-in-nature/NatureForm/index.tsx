@@ -10,10 +10,14 @@ import CustomInput from "@/components/common/CustomInput";
 import CustomButton from "@/components/common/CustomButton";
 import useInvestInNatureFormLogic from "@/utils/hooks/useInvestInNatureFormLogic";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+import useApiCall from "@/utils/hooks/useApiCall";
 
 const NatureForm = () => {
   const router = useRouter();
   const params = useSearchParams();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { apiCall } = useApiCall();
   const { fields, handleFormOnChange, finalObj, isInvalid } =
     useInvestInNatureFormLogic(params.get("email"));
 
@@ -63,7 +67,7 @@ const NatureForm = () => {
                 placeholder={item.placeholder}
                 type={item.type}
                 id={item.id}
-                isLoading={false}
+                isLoading={isSubmitting}
                 isInvalid={item.isInValid}
                 errorMessage={item.errorMessage}
                 options={item.options}
@@ -75,8 +79,22 @@ const NatureForm = () => {
           <CustomButton
             text="Submit"
             variant="solid"
-            isLoading={false}
-            onClick={() => router.push("/investment-confirmed")}
+            isLoading={isSubmitting}
+            onClick={() =>
+              apiCall(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/invest`,
+                finalObj,
+                {
+                  success: "You've been added to the Investors list.",
+                  error: "Something went wrong. Try again.",
+                },
+                setIsSubmitting,
+                () => {
+                  router.push("/investment-confirmed");
+                },
+                null
+              )
+            }
             isDisabled={
               Object.values(finalObj).some((value) => value === "") ||
               Object.values(isInvalid).some((value) => value === true)
