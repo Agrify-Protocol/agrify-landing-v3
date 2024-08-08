@@ -1,11 +1,9 @@
 "use client";
 
-import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import countryList from "../../../../const/countryList.json";
 import getCountryCodeValue from "./getCountryCodeValue";
-import axios from "axios";
 import {
   validateEmail,
   validateFarmSize,
@@ -13,6 +11,7 @@ import {
   validatePhoneNumber,
 } from "@/utils/validationSchema";
 import { sendGAEvent } from "@next/third-parties/google";
+import useApiCall from "@/utils/hooks/useApiCall";
 
 interface UserDetailsProp {
   full_name: string;
@@ -24,7 +23,7 @@ interface UserDetailsProp {
 
 const useWaitlistLogic = () => {
   const router = useRouter();
-  const toast = useToast();
+  const { apiCall } = useApiCall();
   const [farmLocationModalOpen, setFarmLocationModalOpen] = useState(false);
   const [selectedFarmLocation, setSelectedFarmLocation] = useState({
     name: {
@@ -78,7 +77,7 @@ const useWaitlistLogic = () => {
 
   const joinWaitList = () => {
     sendGAEvent("event", "join-waitlist", { value: "join" });
-    setIsLoading(true);
+
     const userNumber =
       userDetails.phone_number.charAt(0) === "0"
         ? userDetails.phone_number.slice(1)
@@ -88,54 +87,27 @@ const useWaitlistLogic = () => {
       phone_number: `${getCountryCodeValue(selectedCountry?.idd)}${userNumber}`,
       farm_country: selectedFarmLocation.name.common,
     };
-    if (process.env.NEXT_PUBLIC_BASE_URL) {
-      axios
-        .post(`${process.env.NEXT_PUBLIC_BASE_URL}/waitlist/join`, newUserDetails)
-        .then((response) => {
-          if (response?.status <= 400) {
-            toast({
-              title: "Success!",
-              position: "top-right",
-              description:
-                response?.data?.message ?? "You've been added to our waitlist.",
-              status: "success",
-              duration: 9000,
-              isClosable: true,
-            });
-            setUserDetails({
-              full_name: "",
-              phone_number: "",
-              email: "",
-              farm_country: "",
-              farm_size: "",
-            });
-            router.push("/waitlist-confirmed");
-          } else {
-            toast({
-              title: "Error!",
-              position: "top-right",
-              description: response?.data?.message ?? "Something went wrong.",
-              status: "error",
-              duration: 9000,
-              isClosable: true,
-            });
-          }
-        })
-        .catch((error) => {
-          toast({
-            title: "Error!",
-            position: "top-right",
-            description:
-              error?.response?.data?.message ?? "Something went wrong",
-            status: "error",
-            duration: 9000,
-            isClosable: true,
-          });
-        })
-        .finally(() => {
-          setIsLoading(false);
+
+    apiCall(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/waitlist/join`,
+      newUserDetails,
+      {
+        success: "You've been added to our waitlist.",
+        error: "Something went wrong. Try again.",
+      },
+      setIsLoading,
+      () => {
+        setUserDetails({
+          full_name: "",
+          phone_number: "",
+          email: "",
+          farm_country: "",
+          farm_size: "",
         });
-    }
+        router.push("/waitlist-confirmed");
+      },
+      null
+    );
   };
 
   const checkIfBtnDisabled = () => {
