@@ -1,4 +1,5 @@
 import HomeComp from "@/components/home";
+import coverImg from "../../public/images/seo-cover.jpeg";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -11,10 +12,10 @@ export const metadata: Metadata = {
       "Helping Farmers improve yield, access debt-free finance, and qualify for international exports.",
     images: [
       {
-        url: "/images/seo-cover.jpeg",
+        url: coverImg.src,
         alt: "Agrify helping farmers improve yield",
-        width: 1280,
-        height: 672,
+        width: coverImg.width,
+        height: coverImg.height,
       },
     ],
     locale: "en_US",

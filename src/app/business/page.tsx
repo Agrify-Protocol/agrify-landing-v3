@@ -1,5 +1,6 @@
 import BusinessComp from "@/components/business";
 import { Metadata } from "next";
+import coverImg from "../../../public/images/seo-cover.jpeg";
 
 export const metadata: Metadata = {
   title: "Agrify - Partner with Us",
@@ -11,10 +12,10 @@ export const metadata: Metadata = {
       "Offset your emissions and decarbonize your supply chain with Regenerative agriculture.",
     images: [
       {
-        url: "/images/seo-cover.jpeg",
+        url: coverImg.src,
         alt: "Decarbonize with Regenerative Agriculture",
-        width: 1280,
-        height: 672,
+        width: coverImg.width,
+        height: coverImg.height,
       },
     ],
     locale: "en_US",
