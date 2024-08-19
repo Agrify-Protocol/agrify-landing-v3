@@ -11,7 +11,7 @@ export const metadata: Metadata = {
       "Offset your emissions and decarbonize your supply chain with Regenerative agriculture.",
     images: [
       {
-        url: "/images/seo-cover.jpeg",
+        url: 'https://agrifyafrica.xyz/images/seo-cover.jpeg',
         alt: "Decarbonize with Regenerative Agriculture",
         width: 1280,
         height: 672,

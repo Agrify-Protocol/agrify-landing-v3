@@ -1,5 +1,6 @@
 import CarbonCalculator from "@/components/carbon-calculator/CarbonCalculator";
 import { Metadata } from "next";
+import coverImg from "../../../public/images/seo-cover.jpeg";
 
 export const metadata: Metadata = {
   title: "Agrify - Emission Test",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
       "Calculate your carbon emissions with our tool and discover regenerative farming initiatives that effectively offset your emissions.",
     images: [
       {
-        url: "/images/seo-cover.jpeg",
+        url: "https://agrifyafrica.xyz/images/seo-cover.jpeg",
         alt: "Calculate and Offset Emissions Regeneratively",
         width: 1280,
         height: 672,
