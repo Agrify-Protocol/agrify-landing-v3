@@ -12,10 +12,10 @@ export const metadata: Metadata = {
       "Helping Farmers improve yield, access debt-free finance, and qualify for international exports.",
     images: [
       {
-        url: coverImg.src,
+        url: "https://agrifyafrica.xyz/images/seo-cover.jpeg",
         alt: "Agrify helping farmers improve yield",
-        width: coverImg.width,
-        height: coverImg.height,
+        width: 1280,
+        height: 672,
       },
     ],
     locale: "en_US",
