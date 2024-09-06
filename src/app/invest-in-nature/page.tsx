@@ -1,5 +1,4 @@
 import NatureForm from "@/components/invest-in-nature/NatureForm";
-import coverImg from "../../../public/images/seo-cover.jpeg";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -22,6 +21,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
     url: "https://agrifyafrica.xyz/invest-in-nature",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Agrify - Partner with Us",
+    description:
+      "Offset your emissions and decarbonize your supply chain with Regenerative agriculture.",
+    images: "https://agrifyafrica.xyz/images/seo-cover.jpeg",
+    creator: "@agrifyafrica",
   },
 };
 

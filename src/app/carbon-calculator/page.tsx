@@ -1,6 +1,5 @@
 import CarbonCalculator from "@/components/carbon-calculator/CarbonCalculator";
 import { Metadata } from "next";
-import coverImg from "../../../public/images/seo-cover.jpeg";
 
 export const metadata: Metadata = {
   title: "Agrify - Emission Test",
@@ -21,6 +20,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
     url: "https://agrifyafrica.xyz/carbon-calculator",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Agrify - Emission Test",
+    description:
+      "Calculate your carbon emissions with our tool and discover regenerative farming initiatives that effectively offset your emissions.",
+    images: "https://agrifyafrica.xyz/images/seo-cover.jpeg",
+    creator: "@agrifyafrica",
   },
 };
 
