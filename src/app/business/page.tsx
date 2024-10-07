@@ -11,7 +11,7 @@ export const metadata: Metadata = {
       "Offset your emissions and decarbonize your supply chain with Regenerative agriculture.",
     images: [
       {
-        url: "https://agrifyafrica.xyz/images/seo-cover.jpeg",
+        url: "https://i.imgur.com/s73EgkU.jpeg",
         alt: "Decarbonize with Regenerative Agriculture",
         width: 1280,
         height: 672,
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Agrify - Partner with Us",
     description:
       "Offset your emissions and decarbonize your supply chain with Regenerative agriculture.",
-    images: "https://agrifyafrica.xyz/images/seo-cover.jpeg",
+    images: "https://i.imgur.com/s73EgkU.jpeg",
     creator: "@agrifyafrica",
   },
 };

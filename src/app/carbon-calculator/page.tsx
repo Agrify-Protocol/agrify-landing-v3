@@ -11,7 +11,7 @@ export const metadata: Metadata = {
       "Calculate your carbon emissions with our tool and discover regenerative farming initiatives that effectively offset your emissions.",
     images: [
       {
-        url: "https://agrifyafrica.xyz/images/seo-cover.jpeg",
+        url: "https://i.imgur.com/s73EgkU.jpeg",
         alt: "Calculate and Offset Emissions Regeneratively",
         width: 1280,
         height: 672,
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Agrify - Emission Test",
     description:
       "Calculate your carbon emissions with our tool and discover regenerative farming initiatives that effectively offset your emissions.",
-    images: "https://agrifyafrica.xyz/images/seo-cover.jpeg",
+    images: "https://i.imgur.com/s73EgkU.jpeg",
     creator: "@agrifyafrica",
   },
 };
