@@ -1,5 +1,7 @@
 # Documentation
 
+<img width="1440" alt="Screenshot 2024-10-07 at 12 52 13" src="https://github.com/user-attachments/assets/c2cfa641-529b-42bb-91b5-1f027e0b4eb4">
+
 ## 🌐 Overview
 
 The Agrify Landing Page is the initial touchpoint designed to attract farmers, investors, and stakeholders to the platform. The primary goal of the landing page is to clearly communicate the mission and value proposition of Agrify, highlighting how it serves as a bridge between sustainable farming practices and market opportunities.
@@ -75,6 +77,4 @@ The Agrify Landing Page codebase follows a well-structured and modular approach 
   `src/utils/hooks/`: Contains `React hooks` specific to the logic of various pages. Each hook is tailored to the page it supports.<br /><br /> For instance,<br /><br />
   <img width="370" alt="Screenshot 2024-10-07 at 12 19 20" src="https://github.com/user-attachments/assets/dfee6c00-c1cc-45d9-8016-f1f253df3e81"><br /><br />
   `src/utils/hooks/useBusinessLogic.js` contains logic unique to the `app/business` page, ensuring that page-specific functionality is organized and easily maintainable. <br /><br />
-  This folder structure ensures that the application remains scalable, organized, and easy to navigate as it evolves.<br /><br />
-
-<img width="1440" alt="Screenshot 2024-10-07 at 12 52 13" src="https://github.com/user-attachments/assets/c2cfa641-529b-42bb-91b5-1f027e0b4eb4">
+  This folder structure ensures that the application remains scalable, organized, and easy to navigate as it evolves.
