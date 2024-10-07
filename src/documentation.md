@@ -60,7 +60,9 @@ This documentation provides insight into how the platform communicates with the 
 ## 🗂️ Folder Structure
 
 The Agrify Landing Page codebase follows a well-structured and modular approach to ensure maintainability and clarity:<br /><br />
-<img width="371" alt="Screenshot 2024-10-07 at 12 29 51" src="https://github.com/user-attachments/assets/783b695e-74b9-48c1-96d1-bcca939c00f2"><br /><br />
+<img width="371" alt="Screenshot 2024-10-07 at 12 58 39" src="https://github.com/user-attachments/assets/3375b4c2-87b5-4f61-b8e6-ffbcbb2f5f9f">
+<br /><br />
+
 
 - 📁 `src/components/`: Contains all the components used across the application. Each component folder corresponds to the page or route it belongs to. <br /><br />
   For example:<br /><br />
